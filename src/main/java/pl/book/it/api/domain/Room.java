@@ -30,7 +30,7 @@ public class Room {
     private Double price;
 
     @ManyToOne
-    private Pleace pleace;
+    private Place place;
 
     @OneToMany
     @JoinColumn(name = "room_id")

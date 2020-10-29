@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -47,4 +46,5 @@ public class User {
     private LocalDateTime createDate;
 
     @Column(name = "update_date")
-    private LocalDateTime updateDate;}
+    private LocalDateTime updateDate;
+}

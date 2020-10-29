@@ -27,7 +27,6 @@ public class Booking {
     private LocalDateTime dateTo;
 
 
-
     @Column(name = "price")
     private Double price;
 
@@ -39,7 +38,7 @@ public class Booking {
     private User user;
 
     @ManyToOne
-    private Pleace pleace;
+    private Place place;
 
     @ManyToOne
     private Room room;

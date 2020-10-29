@@ -17,7 +17,7 @@ public class Foto {
     private Long id;
 
     @ManyToOne
-    private Pleace pleace;
+    private Place place;
 
     @Column(name = "path")
     private String path;

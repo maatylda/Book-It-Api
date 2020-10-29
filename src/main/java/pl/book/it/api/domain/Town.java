@@ -3,7 +3,6 @@ package pl.book.it.api.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.book.it.api.domain.Pleace;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,7 +23,7 @@ public class Town {
 
     @OneToMany
     @JoinColumn(name = "town_id")
-    private Set<Pleace> pleces;
+    private Set<Place> pleces;
 
     @Column(name = "create_date")
     private LocalDateTime createDate;
