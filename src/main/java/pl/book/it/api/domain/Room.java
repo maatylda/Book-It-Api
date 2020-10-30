@@ -1,9 +1,10 @@
 package pl.book.it.api.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.book.it.api.domain.specifications.MaxNumberOfGuestsForRoom;
+import pl.book.it.api.domain.specifications.RoomType;
 import pl.book.it.api.domain.specifications.RoomStandard;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "rooms")
@@ -24,13 +26,13 @@ public class Room {
     private RoomStandard standard;
 
     @Column(name = "number_of_guests")
-    private MaxNumberOfGuestsForRoom numberOfGuests;
+    private RoomType numberOfGuests;
 
     @Column(name = "price")
     private Double price;
 
     @ManyToOne
-    private Pleace pleace;
+    private Place place;
 
     @OneToMany
     @JoinColumn(name = "room_id")

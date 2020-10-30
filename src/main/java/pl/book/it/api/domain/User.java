@@ -1,15 +1,16 @@
 package pl.book.it.api.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.UUID;
 
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -47,4 +48,5 @@ public class User {
     private LocalDateTime createDate;
 
     @Column(name = "update_date")
-    private LocalDateTime updateDate;}
+    private LocalDateTime updateDate;
+}

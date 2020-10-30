@@ -2,14 +2,19 @@ package pl.book.it.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "bookings")
@@ -21,11 +26,10 @@ public class Booking {
     private Long id;
 
     @Column(name = "date_from")
-    private LocalDateTime dateFrom;
+    private LocalDate dateFrom;
 
     @Column(name = "date_to")
-    private LocalDateTime dateTo;
-
+    private LocalDate dateTo;
 
 
     @Column(name = "price")
@@ -39,14 +43,16 @@ public class Booking {
     private User user;
 
     @ManyToOne
-    private Pleace pleace;
+    private Place place;
 
     @ManyToOne
     private Room room;
 
     @Column(name = "create_date")
+    @CreationTimestamp
     private LocalDateTime createDate;
 
     @Column(name = "update_date")
+    @UpdateTimestamp
     private LocalDateTime updateDate;
 }
