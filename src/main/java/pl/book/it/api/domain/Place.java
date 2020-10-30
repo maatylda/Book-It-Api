@@ -1,14 +1,13 @@
 package pl.book.it.api.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "pleaces")

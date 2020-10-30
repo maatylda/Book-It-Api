@@ -1,5 +1,5 @@
 package pl.book.it.api.domain.specifications;
 
-public enum MaxNumberOfGuestsForRoom {
+public enum RoomType {
     SINGLE, TWIN, DOUBLE, TRIPLE, QUAD;
 }
