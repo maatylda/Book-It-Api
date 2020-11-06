@@ -15,7 +15,7 @@ public class TownService {
 
     private final TownRepository townRepository;
 
-    public List<Town> findAllTowns (){
+    public List<Town> getAllTowns(){
        return townRepository.findAll();
     }
 }

@@ -8,7 +8,7 @@ import pl.book.it.api.model.Towns;
 import pl.book.it.api.services.TownService;
 
 @RestController
-@RequestMapping("/towns")
+@RequestMapping("bia/towns")
 @RequiredArgsConstructor
 public class TownController {
 
@@ -16,7 +16,7 @@ public class TownController {
 
     @GetMapping
     public Towns getAllTowns (){
-        return new Towns(townService.findAllTowns());
+        return new Towns(townService.getAllTowns());
     }
 
 

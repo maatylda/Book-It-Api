@@ -38,11 +38,11 @@ public class DbInitializer {
         placeRepository.save(place);
         placeRepository.save(place2);
 
-        Room room = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place).build();
-        Room room2 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
-        Room room3 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
-        Room room5 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
-        Room room4 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
+        Room room = Room.builder().roomType(RoomType.DOUBLE).place(place).build();
+        Room room2 = Room.builder().roomType(RoomType.DOUBLE).place(place2).build();
+        Room room3 = Room.builder().roomType(RoomType.DOUBLE).place(place2).build();
+        Room room5 = Room.builder().roomType(RoomType.DOUBLE).place(place2).build();
+        Room room4 = Room.builder().roomType(RoomType.DOUBLE).place(place2).build();
         roomRepository.save(room);
         roomRepository.save(room2);
         roomRepository.save(room3);

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/places")
+@RequestMapping("bia/places")
 @RequiredArgsConstructor
 public class PlaceController {
 
