@@ -2,11 +2,14 @@ package pl.book.it.api.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.book.it.api.domain.Place;
 import pl.book.it.api.model.Places;
 import pl.book.it.api.services.PlaceService;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 
 @RestController
@@ -31,6 +34,11 @@ public class PlaceController {
                                                   @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                                   @RequestParam(name = "town") String townName) {
         return new Places(placeService.getAllPlacesInTownAvaliableInDates(dateFrom, dateTo, townName));
+    }
+
+    @GetMapping(path = "/place/{id}")
+    public Place getPlaceById (@PathVariable Long id){
+      return  placeService.getPlaceById(id);
     }
 
 

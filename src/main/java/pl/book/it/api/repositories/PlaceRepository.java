@@ -1,4 +1,4 @@
-package pl.book.it.api.reposietories;
+package pl.book.it.api.repositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +9,7 @@ import pl.book.it.api.domain.Place;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecificationExecutor<Place> {
 
@@ -33,4 +34,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
     public List<Place> findPlacesInTownAvaliableInDates(@Param("chosen_date_from") LocalDate chosenDateFrom,
                                                         @Param("chosen_date_to") LocalDate chosenDateTo,
                                                         @Param("town_name") String town);
+
+
+    public Optional<Place> findById (Long id);
 }

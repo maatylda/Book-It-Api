@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.*;
 import pl.book.it.api.domain.specifications.RoomType;
-import pl.book.it.api.reposietories.*;
+import pl.book.it.api.repositories.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class DbInitializer {
         townRepository.save(town2);
 
         Place place = Place.builder().name("Hotel1").description("testHotel").town(town).build();
-        Place place2 = Place.builder().name("Hotel2").description("testHotel2").town(town).build();
+        Place place2 = Place.builder().name("Hotel2").description("testHotel2").town(town2).build();
         placeRepository.save(place);
         placeRepository.save(place2);
 
