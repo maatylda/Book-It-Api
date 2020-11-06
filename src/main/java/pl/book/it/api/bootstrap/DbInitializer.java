@@ -10,7 +10,7 @@ import pl.book.it.api.domain.specifications.RoomType;
 import pl.book.it.api.reposietories.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
@@ -25,11 +25,11 @@ public class DbInitializer {
 
     @EventListener(ContextRefreshedEvent.class)
     public void onEvent() {
-        User user = User.builder().name("Anna").lastName("Kowalska").email("akow@akow.com").phoneNumber("123123123").password("qwerty").bookings(new HashSet<>()).build();
+        User user = User.builder().name("Anna").lastName("Kowalska").email("akow@akow.com").phoneNumber("123123123").password("qwerty").bookings(new ArrayList<>()).build();
         userRepository.save(user);
 
-        Town town = Town.builder().name("Gdynia").build();
-        Town town2 = Town.builder().name("Sopot").build();
+        Town town = Town.builder().name("GDYNIA").build();
+        Town town2 = Town.builder().name("SOPOT").build();
         townRepository.save(town);
         townRepository.save(town2);
 
@@ -40,15 +40,25 @@ public class DbInitializer {
 
         Room room = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place).build();
         Room room2 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
+        Room room3 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
+        Room room5 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
+        Room room4 = Room.builder().numberOfGuests(RoomType.DOUBLE).place(place2).build();
         roomRepository.save(room);
         roomRepository.save(room2);
+        roomRepository.save(room3);
+        roomRepository.save(room4);
+        roomRepository.save(room5);
 
         Booking booking = Booking.builder().dateFrom(LocalDate.of(2020, 11, 1)).dateTo(LocalDate.of(2020, 11, 5)).room(room).user(user).place(room.getPlace()).build();
-        Booking booking2 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 8)).dateTo(LocalDate.of(2020, 11, 9)).room(room).user(user).place(room.getPlace()).build();
-        Booking booking3 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 9)).dateTo(LocalDate.of(2020, 11, 12)).room(room).user(user).place(room.getPlace()).build();
+        Booking booking2 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 3)).dateTo(LocalDate.of(2020, 11, 4)).room(room2).user(user).place(room2.getPlace()).build();
+        Booking booking3 = Booking.builder().dateFrom(LocalDate.of(2020, 10, 30)).dateTo(LocalDate.of(2020, 11, 7)).room(room3).user(user).place(room3.getPlace()).build();
+        Booking booking4 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 5)).dateTo(LocalDate.of(2020, 11, 6)).room(room4).user(user).place(room4.getPlace()).build();
+        Booking booking5 = Booking.builder().dateFrom(LocalDate.of(2020, 10, 30)).dateTo(LocalDate.of(2020, 11, 2)).room(room5).user(user).place(room5.getPlace()).build();
         bookingRepository.save(booking);
         bookingRepository.save(booking3);
         bookingRepository.save(booking2);
+        bookingRepository.save(booking4);
+        bookingRepository.save(booking5);
     }
 
 }

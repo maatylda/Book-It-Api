@@ -1,16 +1,22 @@
 package pl.book.it.api.domain;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "pleaces")
+@Entity(name = "places")
 public class Place {
 
     @Id
@@ -39,17 +45,22 @@ public class Place {
     private Town town;
 
     @OneToMany
-    @JoinColumn(name = "pleace_id")
-    private Set<Room> rooms;
+    @JoinColumn(name = "place_id")
+    private List<Room> rooms;
 
+    @JsonIgnore
     @OneToMany
-    @JoinColumn(name = "fotos")
-    private Set<Foto> fotos;
+    @JoinColumn(name = "pictures")
+    private List<Picture> pictures;
 
+    @JsonIgnore
     @Column(name = "create_date")
+    @CreationTimestamp
     private LocalDateTime createDate;
 
+    @JsonIgnore
     @Column(name = "update_date")
+    @UpdateTimestamp
     private LocalDateTime updateDate;
 
 
