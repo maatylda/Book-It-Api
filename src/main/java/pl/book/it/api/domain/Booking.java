@@ -38,20 +38,25 @@ public class Booking {
     @Column(name = "is_paid")
     private boolean is_paid;
 
+
     @JsonIgnore
     @ManyToOne
     private User user;
 
+    @JsonIgnore
     @ManyToOne
     private Place place;
 
+    @JsonIgnore
     @ManyToOne
     private Room room;
 
+    @JsonIgnore
     @Column(name = "create_date")
     @CreationTimestamp
     private LocalDateTime createDate;
 
+    @JsonIgnore
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;
