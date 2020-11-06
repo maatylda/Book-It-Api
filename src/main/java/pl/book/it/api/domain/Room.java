@@ -27,11 +27,13 @@ public class Room {
 
     @JsonIgnore
     @Column(name = "standard")
+    @Enumerated(value = EnumType.STRING)
     private RoomStandard standard;
 
     @JsonIgnore
-    @Column(name = "number_of_guests")
-    private RoomType numberOfGuests;
+    @Column(name = "room_type")
+    @Enumerated(value = EnumType.STRING)
+    private RoomType roomType;
 
     @JsonIgnore
     @Column(name = "price")
