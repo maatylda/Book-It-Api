@@ -50,10 +50,10 @@ public class DbInitializer {
         roomRepository.save(room5);
 
         Booking booking = Booking.builder().dateFrom(LocalDate.of(2020, 11, 1)).dateTo(LocalDate.of(2020, 11, 5)).room(room).user(user).place(room.getPlace()).build();
-        Booking booking2 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 3)).dateTo(LocalDate.of(2020, 11, 4)).room(room2).user(user).place(room.getPlace()).build();
-        Booking booking3 = Booking.builder().dateFrom(LocalDate.of(2020, 10, 30)).dateTo(LocalDate.of(2020, 11, 7)).room(room3).user(user).place(room.getPlace()).build();
-        Booking booking4 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 5)).dateTo(LocalDate.of(2020, 11, 6)).room(room4).user(user).place(room.getPlace()).build();
-        Booking booking5 = Booking.builder().dateFrom(LocalDate.of(2020, 10, 30)).dateTo(LocalDate.of(2020, 11, 2)).room(room5).user(user).place(room.getPlace()).build();
+        Booking booking2 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 3)).dateTo(LocalDate.of(2020, 11, 4)).room(room2).user(user).place(room2.getPlace()).build();
+        Booking booking3 = Booking.builder().dateFrom(LocalDate.of(2020, 10, 30)).dateTo(LocalDate.of(2020, 11, 7)).room(room3).user(user).place(room3.getPlace()).build();
+        Booking booking4 = Booking.builder().dateFrom(LocalDate.of(2020, 11, 5)).dateTo(LocalDate.of(2020, 11, 6)).room(room4).user(user).place(room4.getPlace()).build();
+        Booking booking5 = Booking.builder().dateFrom(LocalDate.of(2020, 10, 30)).dateTo(LocalDate.of(2020, 11, 2)).room(room5).user(user).place(room5.getPlace()).build();
         bookingRepository.save(booking);
         bookingRepository.save(booking3);
         bookingRepository.save(booking2);

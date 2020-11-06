@@ -43,7 +43,7 @@ public class Room {
 
     @JsonIgnore
     @OneToMany
-    @JoinTable(name = "bookings_in_rooms")
+    @JoinColumn(name = "room_id")
     private List<Booking> bookings;
 
     @JsonIgnore

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Foto {
+public class Picture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

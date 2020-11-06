@@ -12,4 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Places {
     private List<Place> places;
+
+
 }

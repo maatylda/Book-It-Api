@@ -41,18 +41,17 @@ public class Place {
     @Column(name = "zip_code")
     private String zipCode;
 
-
     @ManyToOne
     private Town town;
 
     @OneToMany
-    @JoinTable(name = "rooms_in_places")
+    @JoinColumn(name = "place_id")
     private List<Room> rooms;
 
     @JsonIgnore
     @OneToMany
-    @JoinColumn(name = "fotos")
-    private List<Foto> fotos;
+    @JoinColumn(name = "pictures")
+    private List<Picture> pictures;
 
     @JsonIgnore
     @Column(name = "create_date")
