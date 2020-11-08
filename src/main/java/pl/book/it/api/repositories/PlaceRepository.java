@@ -19,8 +19,8 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
 
     @Query(value = "SELECT p " +
             "FROM places p " +
-            "LEFT JOIN p.town t " +
-            "LEFT JOIN p.rooms r " +
+            "LEFT JOIN  p.town t " +
+            "LEFT JOIN FETCH p.rooms r " +
             "LEFT JOIN r.bookings b " +
             "WHERE " +
             "t.name=:town_name AND " +
@@ -29,7 +29,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
             "(b.dateTo BETWEEN :chosen_date_from AND :chosen_date_to) OR " +
             "(:chosen_date_from BETWEEN b.dateFrom AND b.dateTo) OR " +
             "(:chosen_date_to BETWEEN b.dateFrom AND b.dateTo)" +
-            ")"
+            ") "
     )
     public List<Place> findPlacesInTownAvaliableInDates(@Param("chosen_date_from") LocalDate chosenDateFrom,
                                                         @Param("chosen_date_to") LocalDate chosenDateTo,

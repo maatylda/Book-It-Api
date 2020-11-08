@@ -22,12 +22,11 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
@@ -37,9 +36,6 @@ public class User {
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;

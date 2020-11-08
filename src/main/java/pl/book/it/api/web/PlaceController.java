@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("bia/places")
+@RequestMapping("/bia/places")
 @RequiredArgsConstructor
 public class PlaceController {
 
@@ -36,7 +36,7 @@ public class PlaceController {
         return new Places(placeService.getAllPlacesInTownAvaliableInDates(dateFrom, dateTo, townName));
     }
 
-    @GetMapping(path = "/place/{id}")
+    @GetMapping(path = "/{id}")
     public Place getPlaceById (@PathVariable Long id){
       return  placeService.getPlaceById(id);
     }

@@ -15,7 +15,7 @@ public class UserMapper {
     private final PasswordEncoder passwordEncoder;
 
     public User createUserFromForm(UserForm userForm) {
-        return User.builder().name(userForm.getName()).lastName(userForm.getLastName()).email(userForm.getEmail())
+        return User.builder().firstName(userForm.getName()).lastName(userForm.getLastName()).email(userForm.getEmail())
                 .phoneNumber(userForm.getPhoneNumber()).password(passwordEncoder.encode(userForm.getPassword()))
                 .birthDate(userForm.getBirthDate()).bookings(new ArrayList<>()).build();
     }
