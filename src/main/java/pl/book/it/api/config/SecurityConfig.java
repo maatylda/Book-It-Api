@@ -4,11 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected UserDetailsService userDetailsService() {
+        //tutaj user datail service podać
+        //tutaj przemapować user na usser details
+        return super.userDetailsService();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

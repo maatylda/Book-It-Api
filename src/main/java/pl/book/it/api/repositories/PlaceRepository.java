@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecificationExecutor<Place> {
 
 
+
     public List<Place> findPlacesByTownName(String townName);
 
 
