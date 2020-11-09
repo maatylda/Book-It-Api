@@ -1,4 +1,4 @@
-package pl.book.it.api.model.specifications;
+package pl.book.it.api.model.room.specifications;
 
 public enum RoomStandard {
     STANDARD,

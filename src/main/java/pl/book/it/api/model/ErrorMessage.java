@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ErrorMessage {
 
-        @JsonProperty("msg")
-        private String message;
-        private List<Object> details;
-    }
+    @JsonProperty("msg")
+    private String message;
+    private List<Object> details;
+}
 

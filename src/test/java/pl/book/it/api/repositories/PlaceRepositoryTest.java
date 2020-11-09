@@ -4,18 +4,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import pl.book.it.api.domain.*;
-import pl.book.it.api.model.specifications.RoomType;
+import pl.book.it.api.model.room.specifications.RoomType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class PlaceRepositoryTest {
+    private static final LocalDate BOOKING_DATE_FROM_1 = LocalDate.of(2020, 11, 1);
+    private static final LocalDate BOOKING_DATE_FROM_2 = LocalDate.of(2020, 11, 3);
+    private static final LocalDate BOOKING_DATE_FROM_3 = LocalDate.of(2020, 10, 30);
+    private static final LocalDate BOOKING_DATE_FROM_4 = LocalDate.of(2020, 11, 5);
 
+    private static final LocalDate BOOKING_DATE_TO_1 = LocalDate.of(2020, 11, 30);
+    private static final LocalDate BOOKING_DATE_TO_2 = LocalDate.of(2020, 11, 4);
+    private static final LocalDate BOOKING_DATE_TO_3 = LocalDate.of(2020, 11, 7);
+    private static final LocalDate BOOKING_DATE_TO_4 = LocalDate.of(2020, 11, 6);
 
     @Autowired
     private PlaceRepository placeRepository;
@@ -27,19 +34,10 @@ class PlaceRepositoryTest {
     private TownRepository townRepository;
     @Autowired
     private UserRepository userRepository;
-    private LocalDate BOOKING_DATE_FROM_1 = LocalDate.of(2020, 11, 1);
-    private LocalDate BOOKING_DATE_FROM_2 = LocalDate.of(2020, 11, 3);
-    private LocalDate BOOKING_DATE_FROM_3 = LocalDate.of(2020, 10, 30);
-    private LocalDate BOOKING_DATE_FROM_4 = LocalDate.of(2020, 11, 5);
-
-    private LocalDate BOOKING_DATE_TO_1 = LocalDate.of(2020, 11, 30);
-    private LocalDate BOOKING_DATE_TO_2 = LocalDate.of(2020, 11, 4);
-    private LocalDate BOOKING_DATE_TO_3 = LocalDate.of(2020, 11, 7);
-    private LocalDate BOOKING_DATE_TO_4 = LocalDate.of(2020, 11, 6);
 
 
     @Test
-    void shouldfindNoAvailablePlacesInTownInDates(){
+    void shouldFindNoAvailablePlacesInTownInDates() {
         User user = User.builder().firstName("Ann").lastName("Now").email("an@gmail.com").build();
         userRepository.save(user);
         Town town = Town.builder().name("Toruń").build();
@@ -59,8 +57,8 @@ class PlaceRepositoryTest {
         bookingRepository.save(booking4);
 
 
-        final List<Place> placesReturned = placeRepository.findPlacesInTownAvaliableInDates(LocalDate.of(2020, 10, 2), LocalDate.of(2020, 12, 3), "Toruń");
+        final List<Place> placesReturned = placeRepository.findPlacesInTownAvailableInDates(LocalDate.of(2020, 10, 2), LocalDate.of(2020, 12, 3), "Toruń");
 
-        assertThat(placesReturned).isEqualTo(new ArrayList<>());
+        assertThat(placesReturned).isEmpty();
     }
 }

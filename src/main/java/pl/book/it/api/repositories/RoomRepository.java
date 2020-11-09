@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    public List<Room> findAllByPlace_Id (Long placeId);
+    public List<Room> findAllByPlace_Id(Long placeId);
 
 
     @Query(value = "SELECT r " +
@@ -25,7 +25,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             "(:chosen_date_from BETWEEN b.dateFrom AND b.dateTo) OR " +
             "(:chosen_date_to BETWEEN b.dateFrom AND b.dateTo)" +
             ") ")
-    public List<Room> findRoomsInPlaceAvailableInDates (@Param("chosen_date_from") LocalDate chosenDateFrom,
-                                                        @Param("chosen_date_to") LocalDate chosenDateTo,
-                                                        @Param("place_id") Long placeId);
+    public List<Room> findRoomsInPlaceAvailableInDates(@Param("chosen_date_from") LocalDate chosenDateFrom,
+                                                       @Param("chosen_date_to") LocalDate chosenDateTo,
+                                                       @Param("place_id") Long placeId);
 }

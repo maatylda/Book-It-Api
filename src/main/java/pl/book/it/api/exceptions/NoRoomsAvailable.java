@@ -1,6 +1,6 @@
 package pl.book.it.api.exceptions;
 
-public class NoRoomsAvailable extends BookItExceptions {
+public class NoRoomsAvailable extends BookItException {
     public NoRoomsAvailable() {
     }
 

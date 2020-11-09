@@ -1,18 +1,14 @@
 package pl.book.it.api.services;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Place;
-import pl.book.it.api.exceptions.NoPlaceWithGivenIdExceptions;
+import pl.book.it.api.exceptions.NoPlaceWithGivenIdException;
 import pl.book.it.api.repositories.PlaceRepository;
 
 import java.time.LocalDate;
 import java.util.List;
-
-
-
 
 @RequiredArgsConstructor
 @Service
@@ -30,13 +26,13 @@ public class PlaceService {
     }
 
     public List<Place> getAllPlacesInTownAvailableInDates(LocalDate dateFrom, LocalDate dateTo, String townName) {
-        return placeRepository.findPlacesInTownAvaliableInDates(dateFrom, dateTo, townName.toUpperCase());
+        return placeRepository.findPlacesInTownAvailableInDates(dateFrom, dateTo, townName.toUpperCase());
     }
 
 
     public Place getPlaceById(Long id) {
         return placeRepository.findById(id).orElseThrow(() ->
-                new NoPlaceWithGivenIdExceptions(String.format("Place with given id: %d does not exist", id)));
+                new NoPlaceWithGivenIdException(String.format("Place with given id: %d does not exist", id)));
     }
 }
 
