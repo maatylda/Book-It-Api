@@ -7,6 +7,7 @@ import pl.book.it.api.domain.Town;
 import pl.book.it.api.repositories.TownRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,5 +18,18 @@ public class TownService {
 
     public List<Town> getAllTowns() {
         return townRepository.findAll();
+    }
+
+    public boolean isTownAlreadyExistInDatabase(String townName) {
+        return townRepository.findByName(townName).isPresent();
+
+    }
+
+    public Optional<Town> getTownByName(String townName) {
+        return townRepository.findByName(townName);
+    }
+
+    public Town createTown(String townName) {
+        return townRepository.save(Town.builder().name(townName).build());
     }
 }

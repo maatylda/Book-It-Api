@@ -31,13 +31,11 @@ public class Booking {
     @Column(name = "date_to")
     private LocalDate dateTo;
 
-
     @Column(name = "price")
     private Double price;
 
     @Column(name = "is_paid")
-    private boolean is_paid;
-
+    private boolean isPaid;
 
     @JsonIgnore
     @ManyToOne

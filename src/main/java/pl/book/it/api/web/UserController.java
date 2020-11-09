@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.domain.User;
-import pl.book.it.api.model.UserForm;
+import pl.book.it.api.model.forms.UserForm;
 import pl.book.it.api.services.user.UserService;
 
 import javax.validation.Valid;

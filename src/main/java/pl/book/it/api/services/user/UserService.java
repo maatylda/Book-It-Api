@@ -5,8 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.User;
+import pl.book.it.api.exceptions.BookItException;
 import pl.book.it.api.exceptions.NoUserWithGivenIdException;
-import pl.book.it.api.model.UserForm;
+import pl.book.it.api.model.forms.UserForm;
 import pl.book.it.api.repositories.UserRepository;
 
 @Service
@@ -30,6 +31,9 @@ public class UserService {
 
 
     public User createUser(UserForm userForm) {
+        if (isThereAnAccountWithGivenEmail(userForm.getEmail())) {
+            throw new BookItException(String.format("There is already user with email: %s, chose another email.", userForm.getEmail()));
+        }
         User user = userMapper.createUserFromForm(userForm);
         userRepository.save(user);
         return user;
@@ -37,11 +41,9 @@ public class UserService {
 
     public void updateUser() {
 
-  //todo
+        //todo
 
     }
-
-
 
     public void deleteUser(User user) {
         userRepository.delete(user);
