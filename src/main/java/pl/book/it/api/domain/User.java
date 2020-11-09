@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,13 +24,15 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Email
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "name")
-    private String name;
+    @NotNull
+    @Column(name = "first_name")
+    private String firstName;
 
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
 
@@ -37,9 +41,6 @@ public class User {
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;

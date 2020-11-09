@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import pl.book.it.api.domain.specifications.RoomStandard;
-import pl.book.it.api.domain.specifications.RoomType;
+import pl.book.it.api.model.room.specifications.RoomStandard;
+import pl.book.it.api.model.room.specifications.RoomType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
