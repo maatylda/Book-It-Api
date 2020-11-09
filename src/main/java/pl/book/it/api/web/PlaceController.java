@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.domain.Place;
 import pl.book.it.api.model.Places;
-import pl.book.it.api.services.PlaceService;
+import pl.book.it.api.services.place.PlaceService;
 
 import java.time.LocalDate;
 

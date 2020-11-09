@@ -1,15 +1,13 @@
-package pl.book.it.api.model;
+package pl.book.it.api.model.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 
 @Builder
@@ -28,8 +26,7 @@ public class UserForm {
     private String password;
     @Email
     private String email;
-    @CreationTimestamp
-    private LocalDateTime createDate;
+
 
 //    private LocalDate birthDate;
 

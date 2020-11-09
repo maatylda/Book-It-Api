@@ -1,4 +1,4 @@
-package pl.book.it.api.services;
+package pl.book.it.api.services.place;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,6 +33,10 @@ public class PlaceService {
     public Place getPlaceById(Long id) {
         return placeRepository.findById(id).orElseThrow(() ->
                 new NoPlaceWithGivenIdException(String.format("Place with given id: %d does not exist", id)));
+    }
+
+    public Place createPlace(Place place) {
+        return placeRepository.save(place);
     }
 }
 

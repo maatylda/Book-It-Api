@@ -6,7 +6,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.*;
-import pl.book.it.api.model.UserForm;
+import pl.book.it.api.model.forms.UserForm;
 import pl.book.it.api.model.room.specifications.RoomType;
 import pl.book.it.api.repositories.*;
 import pl.book.it.api.services.user.UserService;
@@ -32,19 +32,19 @@ public class DbInitializer {
         User user = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_1, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
         User user2 = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_2, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
         User user3 = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_3, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
-        User user4 = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_3, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
+        // User user4 = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_3, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
         userRepository.saveAll(List.of(user, user2, user3));
 
 
         Town town = Town.builder().name(TestConst.TOWN_NAME_1).build();
         Town town2 = Town.builder().name(TestConst.TOWN_NAME_2).build();
         townRepository.saveAll(List.of(town, town2));
-        townRepository.save(town2);
+
 
         Place place = placeBuilder(town, TestConst.HOTEL_NAME_1, TestConst.HOTEL_DESCRIPTION_1);
         Place place2 = placeBuilder(town2, TestConst.HOTEL_NAME_2, TestConst.HOTEL_DESCRIPTION_2);
         placeRepository.saveAll(List.of(place, place2));
-        placeRepository.save(place2);
+
 
         Room room = roomBuilder(place);
         Room room2 = roomBuilder(place2);
