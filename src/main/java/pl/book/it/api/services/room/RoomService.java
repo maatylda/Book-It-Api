@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Room;
+import pl.book.it.api.model.forms.RoomForm;
 import pl.book.it.api.repositories.RoomRepository;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.util.List;
 public class RoomService {
 
     private final RoomRepository roomRepository;
+    private final RoomMapper roomMapper;
 
     public List<Room> getAllRoomsInPlace(Long placeId) {
         return roomRepository.findAllByPlace_Id(placeId);
@@ -28,6 +30,11 @@ public class RoomService {
         //tutaj raczej nie powinnam rzucac wyjątku :)
 //        }
         return roomsInPlaceAvailableInDates;
+    }
+
+    //should take placeId from form? or not?
+    public Room createRoom(RoomForm roomForm, Long placeId) {
+        return roomMapper.createFromForm(roomForm, placeId);
     }
 
 }
