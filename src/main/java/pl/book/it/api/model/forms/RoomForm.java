@@ -26,6 +26,7 @@ public class RoomForm {
     @NotNull
     private Double price;
 
+    //maybe redundant?
     @NotNull
     private Long placeId;
 }

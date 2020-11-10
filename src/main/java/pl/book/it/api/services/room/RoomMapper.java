@@ -18,8 +18,8 @@ public class RoomMapper {
 
     private final PlaceRepository placeRepository;
 
-    public Room createFromForm (RoomForm roomForm){
-        return Room.builder().place(getPlace(roomForm))
+    public Room createFromForm (RoomForm roomForm, Long placeId){
+        return Room.builder().place(getPlace(placeId))
                 .roomType(roomForm.getRoomType())
                 .standard(roomForm.getStandard())
                 .price(roomForm.getPrice())
@@ -28,7 +28,7 @@ public class RoomMapper {
     }
 
 
-    private Place getPlace(RoomForm roomForm) {
-        return placeRepository.getOne(roomForm.getPlaceId());
+    private Place getPlace(Long placeId) {
+        return placeRepository.getOne(placeId);
     }
 }
