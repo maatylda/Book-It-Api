@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.book.it.api.domain.Booking;
 import pl.book.it.api.model.forms.BookingForm;
 import pl.book.it.api.services.booking.BookingService;
-import pl.book.it.api.services.validation.Validator;
+import pl.book.it.api.services.validation.BookingValidator;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -21,11 +21,11 @@ import java.net.URISyntaxException;
 public class BookingController {
 
     private final BookingService bookingService;
-    private final Validator validator;
+    private final BookingValidator bookingValidator;
 
     @PostMapping
     public ResponseEntity<Booking> createBooking(@Valid @RequestBody BookingForm bookingForm) throws URISyntaxException {
-        if (validator.isBookingFormValid(bookingForm)) {
+        if (bookingValidator.isBookingFormValid(bookingForm)) {
             final Booking booking = bookingService.createBooking(bookingForm);
 
             return ResponseEntity

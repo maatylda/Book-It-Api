@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Place;
 import pl.book.it.api.exceptions.NoPlaceWithGivenIdException;
+import pl.book.it.api.model.forms.PlaceForm;
 import pl.book.it.api.repositories.PlaceRepository;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.util.List;
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
+    private final PlaceMapper placeMapper;
 
     public List<Place> getAllPlaces() {
         return placeRepository.findAll();
@@ -35,7 +37,8 @@ public class PlaceService {
                 new NoPlaceWithGivenIdException(String.format("Place with given id: %d does not exist", id)));
     }
 
-    public Place createPlace(Place place) {
+    public Place createPlaceFromForm(PlaceForm placeForm) {
+        final Place place = placeMapper.createFromForm(placeForm);
         return placeRepository.save(place);
     }
 }

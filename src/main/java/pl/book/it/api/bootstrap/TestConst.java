@@ -12,7 +12,7 @@ public interface TestConst {
     String PASSWORD_1 = "qwerty";
 
     String TOWN_NAME_1 = "GDYNIA";
-    String TOWN_NAME_2 = "SOPOT";
+    String TOWN_NAME_2 = "ŁÓDŹ";
 
     String HOTEL_NAME_1 = "Hotel1";
     String HOTEL_NAME_2 = "Hotel2";

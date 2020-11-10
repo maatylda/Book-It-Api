@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.model.Rooms;
-import pl.book.it.api.services.RoomService;
+import pl.book.it.api.services.room.RoomService;
 
 import java.time.LocalDate;
 

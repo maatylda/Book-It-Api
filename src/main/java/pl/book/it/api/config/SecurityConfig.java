@@ -21,15 +21,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                //temporary
+                .antMatchers("/bia/admin/**").permitAll()
                 .antMatchers("/h2/**").authenticated().and()
                 .formLogin()
                 .and()
                 .httpBasic()
                 .and()
                 .logout()
+//                .and()
+//                .csrf().ignoringAntMatchers("/h2/**")
                 .and()
-                .csrf().ignoringAntMatchers("/h2/**")
-                .and()
+                //temporary
+                .csrf().disable()
                 .headers().frameOptions().disable();
     }
 

@@ -1,4 +1,4 @@
-package pl.book.it.api.services;
+package pl.book.it.api.services.room;
 
 
 import lombok.RequiredArgsConstructor;
