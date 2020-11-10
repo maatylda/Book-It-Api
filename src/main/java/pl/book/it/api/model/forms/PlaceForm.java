@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.book.it.api.domain.Picture;
+import pl.book.it.api.domain.Room;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Builder
 @Data
@@ -28,6 +31,7 @@ public class PlaceForm {
     private String zipCode;
     @NotNull
     private String townName;
+
 
 
 }

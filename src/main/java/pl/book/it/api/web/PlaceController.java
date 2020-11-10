@@ -23,7 +23,7 @@ public class PlaceController {
         return new Places(placeService.getAllPlaces());
     }
 
-    @GetMapping(path = "/town/{townName}")
+    @GetMapping(path = "/towns/{townName}")
     public Places getPlacesByTown(@PathVariable String townName) {
         return new Places(placeService.getAllPlacesInTown(townName));
     }
