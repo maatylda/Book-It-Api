@@ -32,7 +32,7 @@ public class UserService {
 
     public User createUser(UserDto userDto) {
         if (isThereAnAccountWithGivenEmail(userDto.getEmail())) {
-            throw new BookItException(400,String.format("There is already user with email: %s, chose another email.", userDto.getEmail()),101);
+            throw new BookItException(400, String.format("There is already user with email: %s, chose another email.", userDto.getEmail()), 101);
         }
         User user = userMapper.createUserFromForm(userDto);
         userRepository.save(user);

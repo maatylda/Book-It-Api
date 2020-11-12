@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Place;
-import pl.book.it.api.exceptions.NoPlaceWithGivenIdException;
+import pl.book.it.api.exceptions.BookItException;
+import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.model.Dto.PlaceDto;
 import pl.book.it.api.repositories.PlaceRepository;
 
@@ -31,10 +32,9 @@ public class PlaceService {
         return placeRepository.findPlacesInTownAvailableInDates(dateFrom, dateTo, townName.toUpperCase());
     }
 
-
     public Place getPlaceById(Long id) {
         return placeRepository.findById(id).orElseThrow(() ->
-                new NoPlaceWithGivenIdException(String.format("Place with given id: %d does not exist", id)));
+                new BookItException(400, String.format("Place with given id: %d does not exist", id), ApiErrors.PLACE_NOT_FOUND.getCode()));
     }
 
     public Place createPlaceFromForm(PlaceDto placeDto) {

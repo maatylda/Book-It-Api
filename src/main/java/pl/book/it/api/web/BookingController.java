@@ -34,8 +34,8 @@ public class BookingController {
     }
 
     @GetMapping
-    public Bookings getAllUsersBookings (@RequestBody String email){
-      return  new Bookings(bookingService.getAllUsersBookings(email)) ;
+    public Bookings getAllUsersBookings(@RequestBody String email) {
+        return new Bookings(bookingService.getAllUsersBookings(email));
 
     }
 
