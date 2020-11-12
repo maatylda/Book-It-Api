@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.*;
 import pl.book.it.api.model.Dto.UserDto;
 import pl.book.it.api.model.room.specifications.RoomType;
+import pl.book.it.api.model.user.specifications.Role;
 import pl.book.it.api.repositories.*;
 import pl.book.it.api.services.user.UserService;
 
@@ -76,7 +77,7 @@ public class DbInitializer {
     private User getUserFromService(String fName, String lName, String email, String password, String phoneNumb) {
         final UserDto userDto = UserDto.builder().firstName(fName).lastName(lName)
                 .email(email).password(password).phoneNumber(phoneNumb).build();
-        return userService.createUser(userDto);
+        return userService.createUser(userDto, Role.ADMIN);
     }
 
 }

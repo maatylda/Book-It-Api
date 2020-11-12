@@ -1,6 +1,7 @@
 package pl.book.it.api.services.place;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Place;
@@ -34,10 +35,10 @@ public class PlaceService {
 
     public Place getPlaceById(Long id) {
         return placeRepository.findById(id).orElseThrow(() ->
-                new BookItException(400, String.format("Place with given id: %d does not exist", id), ApiErrors.PLACE_NOT_FOUND.getCode()));
+                new BookItException(400, ApiErrors.PLACE_NOT_FOUND.getMessage(), ApiErrors.PLACE_NOT_FOUND.getCode()));
     }
 
-    public Place createPlaceFromForm(PlaceDto placeDto) {
+    public Place createPlace(PlaceDto placeDto) {
         final Place place = placeMapper.createFromForm(placeDto);
         return placeRepository.save(place);
     }
