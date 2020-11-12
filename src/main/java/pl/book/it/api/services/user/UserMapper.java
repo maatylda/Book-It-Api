@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.User;
 import pl.book.it.api.model.Dto.UserDto;
+import pl.book.it.api.model.user.specifications.Role;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class UserMapper {
 
     private final PasswordEncoder passwordEncoder;
 
-    public User createUserFromForm(UserDto userDto) {
+    public User createUser(UserDto userDto) {
         return User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
@@ -25,5 +26,8 @@ public class UserMapper {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .bookings(new ArrayList<>())
                 .build();
+    }
+    public void setRoleForUser (Role roleForUser,User user){
+        user.setRole(roleForUser);
     }
 }

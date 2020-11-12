@@ -33,7 +33,7 @@ public class AdminController {
         if (bookingValidator.placeExistByName(placeDto.getName())) {
             return ResponseEntity.badRequest().build();
         }
-        final Place place = placeService.createPlaceFromForm(placeDto);
+        final Place place = placeService.createPlace(placeDto);
         return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places" + place.getId()))
                 .body(place);
     }

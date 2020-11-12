@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.book.it.api.model.user.specifications.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -44,6 +45,10 @@ public class User {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @JsonIgnore
     @OneToMany
