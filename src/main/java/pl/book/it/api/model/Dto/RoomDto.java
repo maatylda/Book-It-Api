@@ -1,4 +1,4 @@
-package pl.book.it.api.model.forms;
+package pl.book.it.api.model.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomForm {
+public class RoomDto {
 
     @Enumerated(value = EnumType.STRING)
     private RoomStandard standard;

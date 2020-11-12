@@ -37,5 +37,5 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
 
     public Optional<Place> findById(Long id);
 
-    public Optional<Place> findPlacesByName (String name);
+    public Optional<Place> findPlacesByName(String name);
 }

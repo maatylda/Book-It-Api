@@ -36,7 +36,7 @@ public class BookItExceptionHandler {
         methodToErrorCount.computeIfPresent(httpMethod, (m, count) -> ++count);
         final String requestedFailureUri = request.getRequestURI();
         return ResponseEntity.status(exp.getStatus()).body(new ErrorMessage(exp.getMessage(),
-                List.of(requestedFailureUri, methodToErrorCount)));
+                List.of(requestedFailureUri, methodToErrorCount), exp.getCode()));
     }
 
 

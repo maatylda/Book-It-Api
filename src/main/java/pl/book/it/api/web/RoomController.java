@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @HandledByBookItExceptionHandler
 @RestController
-@RequestMapping("/bia/places")
+@RequestMapping(WebConstants.API_PLACES_PATH)
 @RequiredArgsConstructor
 public class RoomController {
 

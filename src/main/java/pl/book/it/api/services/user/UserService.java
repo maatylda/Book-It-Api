@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.User;
 import pl.book.it.api.exceptions.BookItException;
 import pl.book.it.api.exceptions.NoUserWithGivenIdException;
-import pl.book.it.api.model.forms.UserForm;
+import pl.book.it.api.model.Dto.UserDto;
 import pl.book.it.api.repositories.UserRepository;
 
 @Service
@@ -30,11 +30,11 @@ public class UserService {
     }
 
 
-    public User createUser(UserForm userForm) {
-        if (isThereAnAccountWithGivenEmail(userForm.getEmail())) {
-            throw new BookItException(String.format("There is already user with email: %s, chose another email.", userForm.getEmail()));
+    public User createUser(UserDto userDto) {
+        if (isThereAnAccountWithGivenEmail(userDto.getEmail())) {
+            throw new BookItException(400,String.format("There is already user with email: %s, chose another email.", userDto.getEmail()),101);
         }
-        User user = userMapper.createUserFromForm(userForm);
+        User user = userMapper.createUserFromForm(userDto);
         userRepository.save(user);
         return user;
     }

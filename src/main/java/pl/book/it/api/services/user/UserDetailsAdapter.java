@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.book.it.api.domain.User;
 
 import java.util.Collection;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class UserDetailsAdapter implements UserDetails {
@@ -14,7 +15,7 @@ public class UserDetailsAdapter implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of();
     }
 
     @Override

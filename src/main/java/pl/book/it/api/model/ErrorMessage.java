@@ -15,5 +15,6 @@ public class ErrorMessage {
     @JsonProperty("msg")
     private String message;
     private List<Object> details;
+    private Integer code;
 }
 

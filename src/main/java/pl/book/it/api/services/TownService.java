@@ -21,7 +21,7 @@ public class TownService {
     }
 
     public boolean isTownAlreadyExistInDatabase(String townName) {
-        return townRepository.findByName(townName).isPresent();
+        return townRepository.findByName(townName.toUpperCase()).isPresent();
 
     }
 
@@ -30,6 +30,6 @@ public class TownService {
     }
 
     public Town createTown(String townName) {
-        return townRepository.save(Town.builder().name(townName).build());
+        return townRepository.save(Town.builder().name(townName.toUpperCase()).build());
     }
 }

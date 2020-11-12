@@ -1,21 +1,18 @@
-package pl.book.it.api.model.forms;
+package pl.book.it.api.model.Dto;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.book.it.api.domain.Picture;
-import pl.book.it.api.domain.Room;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlaceForm {
+public class PlaceDto {
 
     @NotNull
     private String name;
@@ -31,7 +28,6 @@ public class PlaceForm {
     private String zipCode;
     @NotNull
     private String townName;
-
 
 
 }
