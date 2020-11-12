@@ -44,8 +44,8 @@ public class BookingService {
 
     }
 
-    public List<Booking> getAllUsersBookings (String email){
-       return bookingRepository.findAllBookingForUser(email);
+    public List<Booking> getAllUsersBookings(String email) {
+        return bookingRepository.findAllBookingForUser(email);
     }
 
 

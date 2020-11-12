@@ -22,9 +22,9 @@ public class UserController {
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<User> createUser(@Valid @RequestBody final UserDto userDto) {
-      if(bookingValidator.userExist(userDto.getEmail()))  {
-        return ResponseEntity.badRequest().build();
-      }
+        if (bookingValidator.userExist(userDto.getEmail())) {
+            return ResponseEntity.badRequest().build();
+        }
         final User user = userService.createUser(userDto);
         return ResponseEntity.ok(user);
     }

@@ -34,7 +34,7 @@ public class AdminController {
             return ResponseEntity.badRequest().build();
         }
         final Place place = placeService.createPlaceFromForm(placeDto);
-        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH+ "/places" + place.getId()))
+        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places" + place.getId()))
                 .body(place);
     }
 
@@ -44,7 +44,7 @@ public class AdminController {
             return ResponseEntity.badRequest().build();
         }
         final Town town = townService.createTown(townDto.getName());
-        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH +"/towns" + town.getId()))
+        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/towns" + town.getId()))
                 .body(town);
     }
 
