@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.User;
-import pl.book.it.api.model.forms.UserForm;
+import pl.book.it.api.model.Dto.UserDto;
 
 import java.util.ArrayList;
 
@@ -16,13 +16,13 @@ public class UserMapper {
 
     private final PasswordEncoder passwordEncoder;
 
-    public User createUserFromForm(UserForm userForm) {
+    public User createUserFromForm(UserDto userDto) {
         return User.builder()
-                .firstName(userForm.getFirstName())
-                .lastName(userForm.getLastName())
-                .email(userForm.getEmail())
-                .phoneNumber(userForm.getPhoneNumber())
-                .password(passwordEncoder.encode(userForm.getPassword()))
+                .firstName(userDto.getFirstName())
+                .lastName(userDto.getLastName())
+                .email(userDto.getEmail())
+                .phoneNumber(userDto.getPhoneNumber())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .bookings(new ArrayList<>())
                 .build();
     }

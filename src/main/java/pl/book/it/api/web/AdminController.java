@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.domain.Place;
 import pl.book.it.api.domain.Room;
 import pl.book.it.api.domain.Town;
-import pl.book.it.api.model.forms.PlaceForm;
-import pl.book.it.api.model.forms.RoomForm;
-import pl.book.it.api.model.forms.TownForm;
+import pl.book.it.api.model.Dto.PlaceDto;
+import pl.book.it.api.model.Dto.RoomDto;
+import pl.book.it.api.model.Dto.TownDto;
 import pl.book.it.api.services.TownService;
 import pl.book.it.api.services.place.PlaceService;
 import pl.book.it.api.services.room.RoomService;
@@ -20,7 +20,7 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/bia/admin")
+@RequestMapping(WebConstants.API_ADMIN_PATH)
 public class AdminController {
 
     private final PlaceService placeService;
@@ -28,33 +28,33 @@ public class AdminController {
     private final RoomService roomService;
     private final BookingValidator bookingValidator;
 
-    @PostMapping
-    public ResponseEntity<Place> createPlace(@Valid @RequestBody PlaceForm placeForm) throws URISyntaxException {
-        if (bookingValidator.placeExistByName(placeForm.getName())) {
+    @PostMapping("/places")
+    public ResponseEntity<Place> createPlace(@Valid @RequestBody PlaceDto placeDto) throws URISyntaxException {
+        if (bookingValidator.placeExistByName(placeDto.getName())) {
             return ResponseEntity.badRequest().build();
         }
-        final Place place = placeService.createPlaceFromForm(placeForm);
-        return ResponseEntity.created(new URI("/bia/admin/places" + place.getId()))
+        final Place place = placeService.createPlaceFromForm(placeDto);
+        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH+ "/places" + place.getId()))
                 .body(place);
     }
 
     @PostMapping("/towns")
-    public ResponseEntity<Town> createTown(@Valid @RequestBody TownForm townForm) throws URISyntaxException {
-        if (bookingValidator.townExist(townForm.getName())) {
+    public ResponseEntity<Town> createTown(@Valid @RequestBody TownDto townDto) throws URISyntaxException {
+        if (bookingValidator.townExist(townDto.getName())) {
             return ResponseEntity.badRequest().build();
         }
-        final Town town = townService.createTown(townForm.getName());
-        return ResponseEntity.created(new URI("/bia/admin/towns" + town.getId()))
+        final Town town = townService.createTown(townDto.getName());
+        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH +"/towns" + town.getId()))
                 .body(town);
     }
 
-    //roomForm have inside placeId
+    //roomDto have inside placeId
     //put? or post?
     @PutMapping("/places/{id}")
-    public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomForm roomForm,
+    public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomDto roomDto,
                                                   @PathVariable("id") Long placeId) {
         if (bookingValidator.placeExist(placeId)) {
-            final Room room = roomService.createRoom(roomForm, placeId);
+            final Room room = roomService.createRoom(roomDto, placeId);
         }
 
         return ResponseEntity.badRequest().build();

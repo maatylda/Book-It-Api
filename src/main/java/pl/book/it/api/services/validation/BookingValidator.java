@@ -2,7 +2,7 @@ package pl.book.it.api.services.validation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.book.it.api.model.forms.BookingForm;
+import pl.book.it.api.model.Dto.BookingDto;
 import pl.book.it.api.repositories.PlaceRepository;
 import pl.book.it.api.repositories.RoomRepository;
 import pl.book.it.api.repositories.TownRepository;
@@ -19,11 +19,11 @@ public class BookingValidator {
     private final UserRepository userRepository;
     private final TownRepository townRepository;
 
-    public boolean isBookingFormValid(final BookingForm bookingForm) {
-        return chosenDatesValid(bookingForm.getDateFrom(), bookingForm.getDateTo()) &&
-                placeExist(bookingForm.getPlaceId()) &&
-                roomExist(bookingForm.getRoomId()) &&
-                userExist(bookingForm.getUserEmail());
+    public boolean isBookingFormValid(final BookingDto bookingDto) {
+        return chosenDatesValid(bookingDto.getDateFrom(), bookingDto.getDateTo()) &&
+                placeExist(bookingDto.getPlaceId()) &&
+                roomExist(bookingDto.getRoomId()) &&
+                userExist(bookingDto.getUserEmail());
 
     }
 

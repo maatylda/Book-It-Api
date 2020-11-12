@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Place;
 import pl.book.it.api.domain.Town;
-import pl.book.it.api.model.forms.PlaceForm;
+import pl.book.it.api.model.Dto.PlaceDto;
 import pl.book.it.api.services.TownService;
 
 import java.util.ArrayList;
@@ -17,16 +17,16 @@ public class PlaceMapper {
 
     private final TownService townService;
 
-    public Place createFromForm(PlaceForm placeForm) {
+    public Place createFromForm(PlaceDto placeDto) {
 
         return Place.builder()
-                .name(placeForm.getName())
-                .description(placeForm.getDescription())
-                .phoneNumber(placeForm.getPhoneNumber())
-                .street(placeForm.getStreet())
-                .streetNumber(placeForm.getStreetNumber())
-                .zipCode(placeForm.getZipCode())
-                .town(getTown(placeForm))
+                .name(placeDto.getName())
+                .description(placeDto.getDescription())
+                .phoneNumber(placeDto.getPhoneNumber())
+                .street(placeDto.getStreet())
+                .streetNumber(placeDto.getStreetNumber())
+                .zipCode(placeDto.getZipCode())
+                .town(getTown(placeDto))
                 .pictures(new ArrayList<>())
                 .rooms(new ArrayList<>())
                 .build();
@@ -34,11 +34,11 @@ public class PlaceMapper {
 
     }
 
-    private Town getTown(PlaceForm placeForm) {
-        return townService.getTownByName(placeForm.getTownName().toUpperCase()).get();
+    private Town getTown(PlaceDto placeDto) {
+        return townService.getTownByName(placeDto.getTownName().toUpperCase()).get();
     }
 
-//    private Town getTownFromForm(PlaceForm placeForm) {
+//    private Town getTownFromForm(PlaceDto placeForm) {
 //        if(townService.isTownAlreadyExistInDatabase(placeForm.getTownName())){
 //             return townService.getTownByName(placeForm.getTownName());
 //         }else {

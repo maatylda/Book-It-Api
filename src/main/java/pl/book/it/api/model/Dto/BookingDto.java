@@ -1,4 +1,4 @@
-package pl.book.it.api.model.forms;
+package pl.book.it.api.model.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingForm {
+public class BookingDto {
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

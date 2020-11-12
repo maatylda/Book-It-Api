@@ -1,4 +1,4 @@
-package pl.book.it.api.model.forms;
+package pl.book.it.api.model.Dto;
 
 
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlaceForm {
+public class PlaceDto {
 
     @NotNull
     private String name;

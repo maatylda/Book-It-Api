@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Room;
-import pl.book.it.api.model.forms.RoomForm;
+import pl.book.it.api.model.Dto.RoomDto;
 import pl.book.it.api.repositories.RoomRepository;
 
 import java.time.LocalDate;
@@ -33,8 +33,8 @@ public class RoomService {
     }
 
     //should take placeId from form? or not?
-    public Room createRoom(RoomForm roomForm, Long placeId) {
-        return roomMapper.createFromForm(roomForm, placeId);
+    public Room createRoom(RoomDto roomDto, Long placeId) {
+        return roomMapper.createFromForm(roomDto, placeId);
     }
 
 }

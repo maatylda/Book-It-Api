@@ -8,7 +8,7 @@ import pl.book.it.api.model.Towns;
 import pl.book.it.api.services.TownService;
 
 @RestController
-@RequestMapping("bia/towns")
+@RequestMapping(WebConstants.API_TOWNS_PATH)
 @RequiredArgsConstructor
 public class TownController {
 

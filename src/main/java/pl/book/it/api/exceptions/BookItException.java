@@ -5,8 +5,14 @@ import org.springframework.http.HttpStatus;
 import java.util.Optional;
 
 public class BookItException extends RuntimeException {
-
+    private Integer code;
     private Integer status;
+
+    public BookItException(Integer status, String message, Integer code) {
+        super(message);
+        this.status = status;
+        this.code = code;
+    }
 
     public BookItException(Integer status, String message) {
         super(message);
@@ -30,5 +36,9 @@ public class BookItException extends RuntimeException {
 
     public Integer getStatus() {
         return Optional.ofNullable(status).orElse(HttpStatus.BAD_REQUEST.value());
+    }
+
+    public Integer getCode() {
+        return Optional.ofNullable(code).orElse(HttpStatus.BAD_REQUEST.value());
     }
 }
