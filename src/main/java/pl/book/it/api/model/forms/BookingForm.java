@@ -18,11 +18,9 @@ public class BookingForm {
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateFrom;
-
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateTo;
-
     @NotNull
     private String userEmail;
     @NotNull

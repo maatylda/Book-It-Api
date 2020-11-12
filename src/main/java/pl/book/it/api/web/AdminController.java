@@ -38,13 +38,13 @@ public class AdminController {
                 .body(place);
     }
 
-    @PostMapping
+    @PostMapping("/towns")
     public ResponseEntity<Town> createTown(@Valid @RequestBody TownForm townForm) throws URISyntaxException {
         if (bookingValidator.townExist(townForm.getName())) {
             return ResponseEntity.badRequest().build();
         }
         final Town town = townService.createTown(townForm.getName());
-        return ResponseEntity.created(new URI("/bia/admin/towns"+town.getId()))
+        return ResponseEntity.created(new URI("/bia/admin/towns" + town.getId()))
                 .body(town);
     }
 
@@ -53,13 +53,12 @@ public class AdminController {
     @PutMapping("/places/{id}")
     public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomForm roomForm,
                                                   @PathVariable("id") Long placeId) {
-        if (bookingValidator.placeExist(placeId)){
+        if (bookingValidator.placeExist(placeId)) {
             final Room room = roomService.createRoom(roomForm, placeId);
         }
 
         return ResponseEntity.badRequest().build();
     }
-
 
 
 }

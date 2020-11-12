@@ -11,6 +11,7 @@ import pl.book.it.api.repositories.PlaceRepository;
 import pl.book.it.api.repositories.RoomRepository;
 
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +42,10 @@ public class BookingService {
 
         return daysBooked * priceForNight;
 
+    }
+
+    public List<Booking> getAllUsersBookings (String email){
+       return bookingRepository.findAllBookingForUser(email);
     }
 
 

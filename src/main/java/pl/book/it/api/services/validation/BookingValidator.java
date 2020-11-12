@@ -47,7 +47,7 @@ public class BookingValidator {
         return dateFrom.isBefore(dateTo);
     }
 
-    public boolean townExist (final String townName){
+    public boolean townExist(final String townName) {
         return townRepository.findByName(townName).isPresent();
     }
 

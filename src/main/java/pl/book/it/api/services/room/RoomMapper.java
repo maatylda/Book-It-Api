@@ -18,7 +18,7 @@ public class RoomMapper {
 
     private final PlaceRepository placeRepository;
 
-    public Room createFromForm (RoomForm roomForm, Long placeId){
+    public Room createFromForm(RoomForm roomForm, Long placeId) {
         return Room.builder().place(getPlace(placeId))
                 .roomType(roomForm.getRoomType())
                 .standard(roomForm.getStandard())
