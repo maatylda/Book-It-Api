@@ -9,8 +9,8 @@ import pl.book.it.api.exceptions.BookItException;
 import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.model.Dto.BookingDto;
 import pl.book.it.api.repositories.BookingRepository;
-import pl.book.it.api.repositories.PlaceRepository;
-import pl.book.it.api.repositories.RoomRepository;
+import pl.book.it.api.services.place.PlaceService;
+import pl.book.it.api.services.room.RoomService;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -21,15 +21,15 @@ import java.util.List;
 public class BookingService {
 
     private final BookingRepository bookingRepository;
-    private final PlaceRepository placeRepository;
-    private final RoomRepository roomRepository;
+    private final PlaceService placeService;
+    private final RoomService roomService;
 
     public Booking createBooking(BookingDto bookingDto) {
         final Booking booking = Booking.builder()
                 .dateFrom(bookingDto.getDateFrom())
                 .dateTo(bookingDto.getDateTo())
-                .place(placeRepository.getOne(bookingDto.getPlaceId()))
-                .room(roomRepository.getOne(bookingDto.getRoomId()))
+                .place(placeService.getPlaceById(bookingDto.getPlaceId()))
+                .room(roomService.getRoomById(bookingDto.getRoomId()))
                 .isPaid(false)
                 .price(calculateBookingPrice(bookingDto))
                 .build();
@@ -39,7 +39,7 @@ public class BookingService {
 
     public Double calculateBookingPrice(BookingDto bookingDto) {
         final long daysBooked = ChronoUnit.DAYS.between(bookingDto.getDateFrom(), bookingDto.getDateTo());
-        final Room room = roomRepository.getOne(bookingDto.getRoomId());
+        final Room room = roomService.getRoomById(bookingDto.getRoomId());
         final Double priceForNight = room.getPrice();
         return daysBooked * priceForNight;
     }

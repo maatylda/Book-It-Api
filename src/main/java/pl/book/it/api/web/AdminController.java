@@ -12,7 +12,6 @@ import pl.book.it.api.model.Dto.TownDto;
 import pl.book.it.api.services.TownService;
 import pl.book.it.api.services.place.PlaceService;
 import pl.book.it.api.services.room.RoomService;
-import pl.book.it.api.services.validation.BookingValidator;
 
 import javax.validation.Valid;
 import java.net.URI;

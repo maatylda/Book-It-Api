@@ -24,7 +24,6 @@ public class TownService {
 
     public boolean isTownAlreadyExistInDatabase(String townName) {
         return townRepository.findByName(townName.toUpperCase()).isPresent();
-
     }
 
     public Optional<Town> getTownByName(String townName) {

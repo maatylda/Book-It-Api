@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class BookingValidator {
     //during refactoring
+    //or removing
 
     private final PlaceRepository placeRepository;
     private final RoomRepository roomRepository;

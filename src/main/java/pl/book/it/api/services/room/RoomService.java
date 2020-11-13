@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Room;
+import pl.book.it.api.exceptions.BookItException;
+import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.model.Dto.RoomDto;
 import pl.book.it.api.repositories.RoomRepository;
 
@@ -31,6 +33,11 @@ public class RoomService {
         final Room room = roomMapper.createRoom(roomDto, roomDto.getPlaceId());
         roomRepository.save(room);
         return room;
+    }
+
+    public Room getRoomById(Long roomId) {
+        return roomRepository.findById(roomId).orElseThrow(() ->
+                new BookItException("Wrong room id. There is no room with given id", ApiErrors.ROOM_NOT_FOUND.getCode()));
     }
 
 }
