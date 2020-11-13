@@ -19,6 +19,11 @@ public class BookItException extends RuntimeException {
         this.status = status;
     }
 
+    public BookItException(String message, Integer code) {
+        super(message);
+        this.code = code;
+    }
+
     public BookItException() {
     }
 

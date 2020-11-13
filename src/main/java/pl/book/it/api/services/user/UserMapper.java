@@ -27,7 +27,8 @@ public class UserMapper {
                 .bookings(new ArrayList<>())
                 .build();
     }
-    public void setRoleForUser (Role roleForUser,User user){
+
+    public void setRoleForUser(Role roleForUser, User user) {
         user.setRole(roleForUser);
     }
 }

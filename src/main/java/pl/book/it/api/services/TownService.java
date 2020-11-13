@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Town;
 import pl.book.it.api.repositories.TownRepository;
+import pl.book.it.api.services.validation.BookingValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class TownService {
 
     private final TownRepository townRepository;
+    private final BookingValidator bookingValidator;
 
     public List<Town> getAllTowns() {
         return townRepository.findAll();
@@ -30,6 +32,7 @@ public class TownService {
     }
 
     public Town createTown(String townName) {
+        bookingValidator.checkIfTheTownExist(townName);
         return townRepository.save(Town.builder().name(townName.toUpperCase()).build());
     }
 }

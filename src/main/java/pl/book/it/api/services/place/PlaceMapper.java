@@ -17,7 +17,7 @@ public class PlaceMapper {
 
     private final TownService townService;
 
-    public Place createFromForm(PlaceDto placeDto) {
+    public Place createPlace(PlaceDto placeDto) {
 
         return Place.builder()
                 .name(placeDto.getName())

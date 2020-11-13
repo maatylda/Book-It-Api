@@ -33,13 +33,12 @@ public class UserService {
     }
 
 
-    public User createUser(UserDto userDto,Role role) {
+    public User createUser(UserDto userDto, Role role) {
         if (isThereAnAccountWithGivenEmail(userDto.getEmail())) {
             throw new BookItException(400, String.format("There is already user with email: %s, chose another email.", userDto.getEmail()), 101);
         }
-        bookingValidator.userExist(userDto.getEmail());
         User user = userMapper.createUser(userDto);
-        userMapper.setRoleForUser(role,user);
+        userMapper.setRoleForUser(role, user);
         userRepository.save(user);
         return user;
     }

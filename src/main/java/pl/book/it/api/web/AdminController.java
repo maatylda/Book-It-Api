@@ -26,38 +26,33 @@ public class AdminController {
     private final PlaceService placeService;
     private final TownService townService;
     private final RoomService roomService;
-    private final BookingValidator bookingValidator;
 
     @PostMapping("/places")
     public ResponseEntity<Place> createPlace(@Valid @RequestBody PlaceDto placeDto) throws URISyntaxException {
-        if (bookingValidator.placeExistByName(placeDto.getName())) {
-            return ResponseEntity.badRequest().build();
-        }
         final Place place = placeService.createPlace(placeDto);
         return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places" + place.getId()))
                 .body(place);
     }
 
+    @DeleteMapping("/places/{id}")
+    public void deletePlace(@PathVariable Long id) {
+        placeService.deletePlace(id);
+    }
+
     @PostMapping("/towns")
     public ResponseEntity<Town> createTown(@Valid @RequestBody TownDto townDto) throws URISyntaxException {
-        if (bookingValidator.townExist(townDto.getName())) {
-            return ResponseEntity.badRequest().build();
-        }
         final Town town = townService.createTown(townDto.getName());
         return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/towns" + town.getId()))
                 .body(town);
     }
 
-    //roomDto have inside placeId
-    //put? or post?
-    @PutMapping("/places/{id}")
-    public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomDto roomDto,
-                                                  @PathVariable("id") Long placeId) {
-        if (bookingValidator.placeExist(placeId)) {
-            final Room room = roomService.createRoom(roomDto, placeId);
-        }
-
-        return ResponseEntity.badRequest().build();
+    @PostMapping("/places/")
+    public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomDto roomDto) throws URISyntaxException {
+        final Place place = placeService.getPlaceById(roomDto.getPlaceId());
+        final Room room = roomService.createRoom(roomDto);
+        placeService.updatePlace(place);
+        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places/" + place.getId()))
+                .body(room);
     }
 
 

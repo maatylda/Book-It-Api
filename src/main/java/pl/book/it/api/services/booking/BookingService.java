@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Booking;
 import pl.book.it.api.domain.Room;
+import pl.book.it.api.exceptions.BookItException;
+import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.model.Dto.BookingDto;
 import pl.book.it.api.repositories.BookingRepository;
 import pl.book.it.api.repositories.PlaceRepository;
@@ -39,13 +41,21 @@ public class BookingService {
         final long daysBooked = ChronoUnit.DAYS.between(bookingDto.getDateFrom(), bookingDto.getDateTo());
         final Room room = roomRepository.getOne(bookingDto.getRoomId());
         final Double priceForNight = room.getPrice();
-
         return daysBooked * priceForNight;
-
     }
 
     public List<Booking> getAllUsersBookings(String email) {
         return bookingRepository.findAllBookingForUser(email);
+    }
+
+    public void deleteBooking(Long id) {
+        final Booking booking = doesBookingExist(id);
+        bookingRepository.delete(booking);
+    }
+
+    public Booking doesBookingExist(Long id) {
+        return bookingRepository.findById(id).orElseThrow(() ->
+                new BookItException(400, "There is no such booking in our system", ApiErrors.BOOKING_NOT_FOUND.getCode()));
     }
 
 
