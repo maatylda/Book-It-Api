@@ -21,5 +21,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(exp.getStatus()).body(errorMessage);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorMessage> handleMethodArgumentNotValidException(final MethodArgumentNotValidException exp) {
+        final HashMap<String, String> errorMessagesByFieldName = new HashMap<>();
+
+        final List<FieldError> fieldErrors = exp.getBindingResult().getFieldErrors();
+        for (FieldError fieldError : fieldErrors) {
+            errorMessagesByFieldName.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(errorMessagesByFieldName));
+    }
 
 }
