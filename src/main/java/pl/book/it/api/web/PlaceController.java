@@ -37,7 +37,7 @@ public class PlaceController {
 
     @GetMapping(path = "/{id}")
     public Place getPlaceById(@PathVariable Long id) {
-        return placeService.getPlaceById(id);
+        return placeService.findPlaceById(id);
     }
 
 

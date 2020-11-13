@@ -4,8 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Town;
+import pl.book.it.api.exceptions.BookItException;
+import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.repositories.TownRepository;
-import pl.book.it.api.services.validation.BookingValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,22 +17,22 @@ import java.util.Optional;
 public class TownService {
 
     private final TownRepository townRepository;
-    private final BookingValidator bookingValidator;
 
     public List<Town> getAllTowns() {
         return townRepository.findAll();
     }
 
-    public boolean isTownAlreadyExistInDatabase(String townName) {
-        return townRepository.findByName(townName.toUpperCase()).isPresent();
-    }
-
     public Optional<Town> getTownByName(String townName) {
-        return townRepository.findByName(townName);
+        return townRepository.findByName(townName.toUpperCase());
     }
 
     public Town createTown(String townName) {
-        bookingValidator.checkIfTheTownExist(townName);
+        checkIfTheTownExist(townName);
         return townRepository.save(Town.builder().name(townName.toUpperCase()).build());
+    }
+
+    public void checkIfTheTownExist(final String townName) {
+        getTownByName(townName).orElseThrow(() ->
+                new BookItException(String.format("There is no such Town as %s in database", townName), ApiErrors.TOWN_NOT_FOUND.getCode()));
     }
 }

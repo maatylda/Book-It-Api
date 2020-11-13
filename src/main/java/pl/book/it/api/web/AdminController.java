@@ -3,6 +3,7 @@ package pl.book.it.api.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.domain.Place;
 import pl.book.it.api.domain.Room;
 import pl.book.it.api.domain.Town;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@HandledByBookItExceptionHandler
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(WebConstants.API_ADMIN_PATH)
@@ -47,7 +49,7 @@ public class AdminController {
 
     @PostMapping("/places/")
     public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomDto roomDto) throws URISyntaxException {
-        final Place place = placeService.getPlaceById(roomDto.getPlaceId());
+        final Place place = placeService.findPlaceById(roomDto.getPlaceId());
         final Room room = roomService.createRoom(roomDto);
         placeService.updatePlace(place);
         return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places/" + place.getId()))
