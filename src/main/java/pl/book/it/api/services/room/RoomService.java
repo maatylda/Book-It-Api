@@ -20,11 +20,11 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomMapper roomMapper;
 
-    public List<Room> getAllRoomsInPlace(Long placeId) {
+    public List<Room> findAllRoomsInPlace(Long placeId) {
         return roomRepository.findAllByPlace_Id(placeId);
     }
 
-    public List<Room> getAllRoomsInPlaceAvailableInDates(LocalDate dateFrom, LocalDate dateTo, Long placeId) {
+    public List<Room> findAllRoomsInPlaceAvailableInDates(LocalDate dateFrom, LocalDate dateTo, Long placeId) {
         return roomRepository.findRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId);
     }
 
@@ -34,7 +34,7 @@ public class RoomService {
         return room;
     }
 
-    public Room getRoomById(Long roomId) {
+    public Room findRoomById(Long roomId) {
         return roomRepository.findById(roomId).orElseThrow(() ->
                 new BookItException("Wrong room id. There is no room with given id", ApiErrors.ROOM_NOT_FOUND.getCode()));
     }

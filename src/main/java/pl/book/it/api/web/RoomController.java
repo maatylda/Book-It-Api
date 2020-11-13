@@ -19,14 +19,14 @@ public class RoomController {
 
     @GetMapping("/{placeId}/rooms")
     public Rooms getRoomsInPlace(@PathVariable Long placeId) {
-        return new Rooms(roomService.getAllRoomsInPlace(placeId));
+        return new Rooms(roomService.findAllRoomsInPlace(placeId));
     }
 
     @GetMapping("/{placeId}/rooms/search")
     public Rooms getRoomsAvailableInDates(@RequestParam(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
                                           @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                           @PathVariable Long placeId) {
-        return new Rooms(roomService.getAllRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId));
+        return new Rooms(roomService.findAllRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId));
     }
 
 

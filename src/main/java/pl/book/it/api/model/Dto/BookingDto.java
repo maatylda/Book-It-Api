@@ -1,11 +1,12 @@
 package pl.book.it.api.model.Dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -16,10 +17,8 @@ import java.time.LocalDate;
 public class BookingDto {
 
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateFrom;
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateTo;
     @NotNull
     private String userEmail;
@@ -27,4 +26,9 @@ public class BookingDto {
     private Long placeId;
     @NotNull
     private Long roomId;
+    @JsonIgnore
+    @AssertTrue(message = "Booking start date need to be before ending date")
+    public boolean isDateFromBeforeDateTo() {
+        return dateFrom.isBefore(dateTo);
+    }
 }

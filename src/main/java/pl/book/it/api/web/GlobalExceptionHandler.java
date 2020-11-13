@@ -10,14 +10,15 @@ import pl.book.it.api.model.ErrorMessage;
 
 @RestControllerAdvice(annotations = {HandledByBookItExceptionHandler.class})
 @Slf4j
-public class BookItExceptionHandler {
+public class GlobalExceptionHandler {
 
-    public BookItExceptionHandler() {
+    public GlobalExceptionHandler() {
     }
 
     @ExceptionHandler(BookItException.class)
     public ResponseEntity<ErrorMessage> handleBookItException(final BookItException exp) {
-        return ResponseEntity.status(exp.getStatus()).body(new ErrorMessage(exp.getStatus(), exp.getMessage(), exp.getCode()));
+        final ErrorMessage errorMessage = new ErrorMessage(exp.getStatus(), exp.getMessage(), exp.getCode());
+        return ResponseEntity.status(exp.getStatus()).body(errorMessage);
     }
 
 

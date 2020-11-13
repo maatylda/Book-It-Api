@@ -2,11 +2,13 @@ package pl.book.it.api.exceptions;
 
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
 import java.util.Optional;
 
 public class BookItException extends RuntimeException {
     private Integer code;
     private Integer status;
+    private List<String> messages;
 
     public BookItException(Integer status, String message, Integer code) {
         super(message);
