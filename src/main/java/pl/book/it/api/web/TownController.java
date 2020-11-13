@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.model.Towns;
 import pl.book.it.api.services.TownService;
 
+@HandledByBookItExceptionHandler
 @RestController
 @RequestMapping(WebConstants.API_TOWNS_PATH)
 @RequiredArgsConstructor

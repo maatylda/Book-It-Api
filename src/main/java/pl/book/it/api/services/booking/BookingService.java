@@ -28,7 +28,7 @@ public class BookingService {
         final Booking booking = Booking.builder()
                 .dateFrom(bookingDto.getDateFrom())
                 .dateTo(bookingDto.getDateTo())
-                .place(placeService.getPlaceById(bookingDto.getPlaceId()))
+                .place(placeService.findPlaceById(bookingDto.getPlaceId()))
                 .room(roomService.getRoomById(bookingDto.getRoomId()))
                 .isPaid(false)
                 .price(calculateBookingPrice(bookingDto))

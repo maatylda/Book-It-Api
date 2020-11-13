@@ -3,6 +3,7 @@ package pl.book.it.api.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.domain.Booking;
 import pl.book.it.api.model.Bookings;
 import pl.book.it.api.model.Dto.BookingDto;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@HandledByBookItExceptionHandler
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(WebConstants.API_BOOKINGS_PATH)
@@ -23,12 +25,11 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<Booking> createBooking(@Valid @RequestBody BookingDto bookingDto) throws URISyntaxException {
-        if (bookingValidator.isBookingDtoValid(bookingDto)) {
-            final Booking booking = bookingService.createBooking(bookingDto);
-            return ResponseEntity
-                    .created(new URI(WebConstants.API_BOOKINGS_PATH + booking.getId()))
-                    .body(booking);
-        } else return ResponseEntity.badRequest().build();
+        bookingValidator.isBookingDtoValid(bookingDto);
+        final Booking booking = bookingService.createBooking(bookingDto);
+        return ResponseEntity
+                .created(new URI(WebConstants.API_BOOKINGS_PATH + booking.getId()))
+                .body(booking);
     }
 
     @GetMapping
