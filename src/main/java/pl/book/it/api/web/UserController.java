@@ -9,7 +9,6 @@ import pl.book.it.api.domain.User;
 import pl.book.it.api.model.Dto.UserDto;
 import pl.book.it.api.model.user.specifications.Role;
 import pl.book.it.api.services.user.UserService;
-import pl.book.it.api.services.validation.BookingValidator;
 
 import javax.validation.Valid;
 

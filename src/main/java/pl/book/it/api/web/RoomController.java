@@ -27,7 +27,6 @@ public class RoomController {
                                           @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                           @PathVariable Long placeId) {
         return new Rooms(roomService.getAllRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId));
-
     }
 
 

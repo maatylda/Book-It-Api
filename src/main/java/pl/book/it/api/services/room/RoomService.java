@@ -24,17 +24,13 @@ public class RoomService {
     }
 
     public List<Room> getAllRoomsInPlaceAvailableInDates(LocalDate dateFrom, LocalDate dateTo, Long placeId) {
-        final List<Room> roomsInPlaceAvailableInDates = roomRepository.findRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId);
-//        if (roomsInPlaceAvailableInDates.isEmpty()){
-//            throw new NoRoomsAvailable("There are no rooms in chosen dates");
-        //tutaj raczej nie powinnam rzucac wyjątku :)
-//        }
-        return roomsInPlaceAvailableInDates;
+        return roomRepository.findRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId);
     }
 
-    //should take placeId from form? or not?
-    public Room createRoom(RoomDto roomDto, Long placeId) {
-        return roomMapper.createFromForm(roomDto, placeId);
+    public Room createRoom(RoomDto roomDto) {
+        final Room room = roomMapper.createRoom(roomDto, roomDto.getPlaceId());
+        roomRepository.save(room);
+        return room;
     }
 
 }

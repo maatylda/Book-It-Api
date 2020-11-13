@@ -23,20 +23,22 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<Booking> createBooking(@Valid @RequestBody BookingDto bookingDto) throws URISyntaxException {
-        if (bookingValidator.isBookingFormValid(bookingDto)) {
+        if (bookingValidator.isBookingDtoValid(bookingDto)) {
             final Booking booking = bookingService.createBooking(bookingDto);
-
             return ResponseEntity
                     .created(new URI(WebConstants.API_BOOKINGS_PATH + booking.getId()))
                     .body(booking);
-
         } else return ResponseEntity.badRequest().build();
     }
 
     @GetMapping
     public Bookings getAllUsersBookings(@RequestBody String email) {
         return new Bookings(bookingService.getAllUsersBookings(email));
+    }
 
+    @DeleteMapping("/{bookingId}")
+    public void deleteBooking(@PathVariable final Long bookingId) {
+        bookingService.deleteBooking(bookingId);
     }
 
 }
