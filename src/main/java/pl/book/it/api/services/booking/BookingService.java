@@ -29,7 +29,7 @@ public class BookingService {
                 .dateFrom(bookingDto.getDateFrom())
                 .dateTo(bookingDto.getDateTo())
                 .place(placeService.findPlaceById(bookingDto.getPlaceId()))
-                .room(roomService.getRoomById(bookingDto.getRoomId()))
+                .room(roomService.findRoomById(bookingDto.getRoomId()))
                 .isPaid(false)
                 .price(calculateBookingPrice(bookingDto))
                 .build();
@@ -39,7 +39,7 @@ public class BookingService {
 
     public Double calculateBookingPrice(BookingDto bookingDto) {
         final long daysBooked = ChronoUnit.DAYS.between(bookingDto.getDateFrom(), bookingDto.getDateTo());
-        final Room room = roomService.getRoomById(bookingDto.getRoomId());
+        final Room room = roomService.findRoomById(bookingDto.getRoomId());
         final Double priceForNight = room.getPrice();
         return daysBooked * priceForNight;
     }
