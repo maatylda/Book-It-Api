@@ -12,13 +12,14 @@ import java.util.Map;
 public class ErrorMessage {
     //zmienić nazwę klasy
     private Integer httpStatus;
-    //private String message;
+    private String message;
     private Integer code;
+
     private Map<String, String> errors;
 
     public ErrorMessage(Integer httpStatus, String message, Integer code) {
         this.httpStatus = httpStatus;
-        //this.message = message;
+        this.message = message;
         this.code = code;
     }
 
