@@ -52,7 +52,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user")
     private List<Booking> bookings;
 
     @JsonIgnore

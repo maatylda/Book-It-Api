@@ -5,8 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import pl.book.it.api.annotations.ExistingPlace;
+import pl.book.it.api.annotations.ExistingRoom;
+import pl.book.it.api.annotations.ExistingUser;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -16,15 +22,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class BookingDto {
 
-    @NotNull
+// jak zwalidować źle wpisaną datę? obsłużyć wyjątek DateTimeParseException
+    @FutureOrPresent
     private LocalDate dateFrom;
     @NotNull
+    @Future
     private LocalDate dateTo;
-    @NotNull
+    @ExistingUser(message = "api.error.user.not.found")
     private String userEmail;
-    @NotNull
+    @ExistingPlace(message = "api.error.place.not.found")
     private Long placeId;
-    @NotNull
+    @ExistingRoom
     private Long roomId;
     @JsonIgnore
     @AssertTrue(message = "Booking start date need to be before ending date")

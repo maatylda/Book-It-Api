@@ -33,18 +33,18 @@ public class DbInitializer {
             return;
         }
 
-        User user = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_1, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
-        User user2 = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_2, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
-        User user3 = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_3, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
-        // User user4 = getUserFromService(TestConst.FIRST_NAME_1, TestConst.LAST_NAME_1, TestConst.EMAIL_3, TestConst.PASSWORD_1, TestConst.PHONE_NUMBER_1);
+        User user = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_1, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
+        User user2 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_2, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
+        User user3 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_3, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
+        // User user4 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_3, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
         userRepository.saveAll(List.of(user, user2, user3));
 
-        Town town = Town.builder().name(TestConst.TOWN_NAME_1).build();
-        Town town2 = Town.builder().name(TestConst.TOWN_NAME_2).build();
+        Town town = Town.builder().name(TestConsts.TOWN_NAME_1).build();
+        Town town2 = Town.builder().name(TestConsts.TOWN_NAME_2).build();
         townRepository.saveAll(List.of(town, town2));
 
-        Place place = placeBuilder(town, TestConst.HOTEL_NAME_1, TestConst.HOTEL_DESCRIPTION_1);
-        Place place2 = placeBuilder(town2, TestConst.HOTEL_NAME_2, TestConst.HOTEL_DESCRIPTION_2);
+        Place place = placeBuilder(town, TestConsts.HOTEL_NAME_1, TestConsts.HOTEL_DESCRIPTION_1);
+        Place place2 = placeBuilder(town2, TestConsts.HOTEL_NAME_2, TestConsts.HOTEL_DESCRIPTION_2);
         placeRepository.saveAll(List.of(place, place2));
 
         Room room = roomBuilder(place);
@@ -54,11 +54,11 @@ public class DbInitializer {
         Room room4 = roomBuilder(place2);
         roomRepository.saveAll(List.of(room, room2, room3, room4, room5));
 
-        Booking booking = bookingBuilder(user, room, TestConst.BOOKING_DATE_FROM_1, TestConst.BOOKING_DATE_TO_1);
-        Booking booking2 = bookingBuilder(user, room2, TestConst.BOOKING_DATE_FROM_2, TestConst.BOOKING_DATE_TO_2);
-        Booking booking3 = bookingBuilder(user, room3, TestConst.BOOKING_DATE_FROM_3, TestConst.BOOKING_DATE_TO_3);
-        Booking booking4 = bookingBuilder(user, room4, TestConst.BOOKING_DATE_FROM_4, TestConst.BOOKING_DATE_TO_4);
-        Booking booking5 = bookingBuilder(user, room5, TestConst.BOOKING_DATE_FROM_5, TestConst.BOOKING_DATE_TO_5);
+        Booking booking = bookingBuilder(user, room, TestConsts.BOOKING_DATE_FROM_1, TestConsts.BOOKING_DATE_TO_1);
+        Booking booking2 = bookingBuilder(user, room2, TestConsts.BOOKING_DATE_FROM_2, TestConsts.BOOKING_DATE_TO_2);
+        Booking booking3 = bookingBuilder(user, room3, TestConsts.BOOKING_DATE_FROM_3, TestConsts.BOOKING_DATE_TO_3);
+        Booking booking4 = bookingBuilder(user, room4, TestConsts.BOOKING_DATE_FROM_4, TestConsts.BOOKING_DATE_TO_4);
+        Booking booking5 = bookingBuilder(user, room5, TestConsts.BOOKING_DATE_FROM_5, TestConsts.BOOKING_DATE_TO_5);
         bookingRepository.saveAll(List.of(booking, booking2, booking3, booking4, booking5));
     }
 
@@ -71,7 +71,7 @@ public class DbInitializer {
     }
 
     private Room roomBuilder(Place place) {
-        return Room.builder().roomType(RoomType.DOUBLE).place(place).build();
+        return Room.builder().roomType(RoomType.DOUBLE).place(place).price(TestConsts.PRICE_1).build();
     }
 
     private User getUserFromService(String fName, String lName, String email, String password, String phoneNumb) {

@@ -41,6 +41,7 @@ public class BookItException extends RuntimeException {
         super(cause);
     }
 
+
     public Integer getStatus() {
         return Optional.ofNullable(status).orElse(HttpStatus.BAD_REQUEST.value());
     }

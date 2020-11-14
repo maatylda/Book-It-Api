@@ -6,11 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Booking;
 import pl.book.it.api.domain.Room;
 import pl.book.it.api.exceptions.BookItException;
-import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.model.Dto.BookingDto;
 import pl.book.it.api.repositories.BookingRepository;
 import pl.book.it.api.services.place.PlaceService;
 import pl.book.it.api.services.room.RoomService;
+import pl.book.it.api.services.user.UserService;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -23,6 +23,7 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final PlaceService placeService;
     private final RoomService roomService;
+    private final UserService userService;
 
     public Booking createBooking(BookingDto bookingDto) {
         final Booking booking = Booking.builder()
@@ -32,6 +33,7 @@ public class BookingService {
                 .room(roomService.findRoomById(bookingDto.getRoomId()))
                 .isPaid(false)
                 .price(calculateBookingPrice(bookingDto))
+                .user(userService.findUserById(bookingDto.getUserEmail()))
                 .build();
 
         return bookingRepository.save(booking);
@@ -55,8 +57,7 @@ public class BookingService {
 
     public Booking doesBookingExist(Long id) {
         return bookingRepository.findById(id).orElseThrow(() ->
-                new BookItException(400, "There is no such booking in our system", ApiErrors.BOOKING_NOT_FOUND.getCode()));
+                new BookItException(400, "There is no such booking in our system"));
     }
-
 
 }
