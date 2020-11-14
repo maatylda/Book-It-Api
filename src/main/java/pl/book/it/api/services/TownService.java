@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Town;
 import pl.book.it.api.exceptions.BookItException;
-import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.repositories.TownRepository;
 
 import java.util.List;
@@ -33,6 +32,6 @@ public class TownService {
 
     public void checkIfTheTownExist(final String townName) {
         getTownByName(townName).orElseThrow(() ->
-                new BookItException(String.format("There is no such Town as %s in database", townName), ApiErrors.TOWN_NOT_FOUND.getCode()));
+                new BookItException(String.format("There is no such Town as %s in database", townName)));
     }
 }

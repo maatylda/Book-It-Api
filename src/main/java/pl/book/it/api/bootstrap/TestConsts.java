@@ -2,7 +2,7 @@ package pl.book.it.api.bootstrap;
 
 import java.time.LocalDate;
 
-public interface TestConst {
+public interface TestConsts {
     String PHONE_NUMBER_1 = "123123123";
     String FIRST_NAME_1 = "Anna";
     String LAST_NAME_1 = "Kowalska";
@@ -31,5 +31,7 @@ public interface TestConst {
     LocalDate BOOKING_DATE_TO_3 = LocalDate.of(2020, 10, 10);
     LocalDate BOOKING_DATE_TO_4 = LocalDate.of(2020, 11, 6);
     LocalDate BOOKING_DATE_TO_5 = LocalDate.of(2020, 11, 2);
+
+    Double PRICE_1 = 200.10;
 
 }

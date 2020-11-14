@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Room;
 import pl.book.it.api.exceptions.BookItException;
-import pl.book.it.api.model.ApiErrors;
 import pl.book.it.api.model.Dto.RoomDto;
 import pl.book.it.api.repositories.RoomRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,8 +35,16 @@ public class RoomService {
     }
 
     public Room findRoomById(Long roomId) {
-        return roomRepository.findById(roomId).orElseThrow(() ->
-                new BookItException("Wrong room id. There is no room with given id", ApiErrors.ROOM_NOT_FOUND.getCode()));
+        return findOptionalRoomById(roomId).orElseThrow(() ->
+                new BookItException("Wrong room id. There is no room with given id"));
+    }
+
+    public boolean roomWithIdExist(Long id) {
+        return findOptionalRoomById(id).isPresent();
+    }
+
+    public Optional<Room> findOptionalRoomById(Long roomId) {
+        return roomRepository.findById(roomId);
     }
 
 }

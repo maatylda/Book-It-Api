@@ -2,6 +2,7 @@ package pl.book.it.api.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.domain.Booking;
@@ -12,6 +13,7 @@ import pl.book.it.api.services.booking.BookingService;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.Principal;
 
 @HandledByBookItExceptionHandler
 @RestController
@@ -29,8 +31,11 @@ public class BookingController {
                 .body(booking);
     }
 
+    //to mogłoby być zrobione jako aspekt :)
     @GetMapping
-    public Bookings getAllUsersBookings(@RequestBody String email) {
+    public Bookings getAllUsersBookings(@RequestBody String email, @AuthenticationPrincipal Principal principal) {
+        //zwróci nazwę użytkownika, moze być nullem
+        //final Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new Bookings(bookingService.getAllUsersBookings(email));
     }
 

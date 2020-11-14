@@ -20,19 +20,19 @@ public class PlaceController {
 
     @GetMapping
     public Places getAllPlaces() {
-        return new Places(placeService.getAllPlaces());
+        return new Places(placeService.findAllPlaces());
     }
 
     @GetMapping(path = "/towns/{townName}")
     public Places getPlacesByTown(@PathVariable String townName) {
-        return new Places(placeService.getAllPlacesInTown(townName));
+        return new Places(placeService.findAllPlacesInTown(townName));
     }
 
     @GetMapping(path = "/search")
     public Places getPlacesByTownAvailableInDates(@RequestParam(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
                                                   @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                                   @RequestParam(name = "town") String townName) {
-        return new Places(placeService.getAllPlacesInTownAvailableInDates(dateFrom, dateTo, townName));
+        return new Places(placeService.findAllPlacesInTownAvailableInDates(dateFrom, dateTo, townName));
     }
 
     @GetMapping(path = "/{id}")
