@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.book.it.api.annotations.ExistingUser;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
@@ -20,7 +21,7 @@ public class BookingDto {
     private LocalDate dateFrom;
     @NotNull
     private LocalDate dateTo;
-    @NotNull
+    @ExistingUser
     private String userEmail;
     @NotNull
     private Long placeId;
