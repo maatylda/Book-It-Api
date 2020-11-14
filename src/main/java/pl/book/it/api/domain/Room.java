@@ -1,10 +1,7 @@
 package pl.book.it.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import pl.book.it.api.model.room.specifications.RoomStandard;
@@ -13,8 +10,10 @@ import pl.book.it.api.model.room.specifications.RoomType;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -58,4 +57,33 @@ public class Room {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return id.equals(room.id) &&
+                standard == room.standard &&
+                roomType == room.roomType &&
+                place.equals(room.place) &&
+                createDate.equals(room.createDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, standard, roomType, place, createDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", standard=" + standard +
+                ", roomType=" + roomType +
+                ", price=" + price +
+                ", place=" + place +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                '}';
+    }
 }

@@ -24,6 +24,7 @@ public class RoomService {
         return roomRepository.findAllByPlace_Id(placeId);
     }
 
+    //TODO fix it in RoomRepository!!!
     public List<Room> findAllRoomsInPlaceAvailableInDates(LocalDate dateFrom, LocalDate dateTo, Long placeId) {
         return roomRepository.findRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId);
     }
@@ -47,4 +48,7 @@ public class RoomService {
         return roomRepository.findById(roomId);
     }
 
+    public void updateRoom(Room room) {
+        roomRepository.save(room);
+    }
 }
