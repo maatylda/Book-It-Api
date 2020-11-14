@@ -36,8 +36,8 @@ public class UserService {
         return user;
     }
 
-    public void updateUser() {
-        //todo
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 
     public void deleteUser(User user) {
