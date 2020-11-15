@@ -8,12 +8,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Data
 @Builder
-@ToString(exclude = {"user","place","room"})
-@EqualsAndHashCode(exclude = {"user","place","room"})
+@ToString(exclude = {"user", "place", "room"})
+@EqualsAndHashCode(exclude = {"user", "place", "room"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "bookings")
