@@ -20,6 +20,4 @@ public class TownController {
     public Towns getAllTowns() {
         return new Towns(townService.getAllTowns());
     }
-
-
 }
