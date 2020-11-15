@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Place;
 import pl.book.it.api.domain.Town;
 import pl.book.it.api.model.Dto.PlaceDto;
-import pl.book.it.api.services.TownService;
+import pl.book.it.api.services.town.TownService;
 
 import java.util.ArrayList;
 

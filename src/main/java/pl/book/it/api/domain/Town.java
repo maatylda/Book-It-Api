@@ -28,7 +28,7 @@ public class Town {
     @JsonIgnore
     @OneToMany
     @JoinColumn(name = "town_id")
-    private List<Place> pleces;
+    private List<Place> places;
 
     @JsonIgnore
     @Column(name = "create_date")

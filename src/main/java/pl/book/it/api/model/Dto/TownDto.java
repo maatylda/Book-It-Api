@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class TownDto {
 
+    private Long id;
+
     @NotNull
     private String name;
 }
