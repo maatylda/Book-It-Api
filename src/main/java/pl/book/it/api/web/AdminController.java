@@ -10,7 +10,7 @@ import pl.book.it.api.domain.Town;
 import pl.book.it.api.model.Dto.PlaceDto;
 import pl.book.it.api.model.Dto.RoomDto;
 import pl.book.it.api.model.Dto.TownDto;
-import pl.book.it.api.services.TownService;
+import pl.book.it.api.services.town.TownService;
 import pl.book.it.api.services.place.PlaceService;
 import pl.book.it.api.services.room.RoomService;
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.model.Towns;
-import pl.book.it.api.services.TownService;
+import pl.book.it.api.services.town.TownService;
 
 @HandledByBookItExceptionHandler
 @RestController
@@ -18,6 +18,6 @@ public class TownController {
 
     @GetMapping
     public Towns getAllTowns() {
-        return new Towns(townService.getAllTowns());
+        return new Towns(townService.getAllTownsDto());
     }
 }

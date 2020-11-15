@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.book.it.api.domain.Town;
+import pl.book.it.api.model.Dto.TownDto;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 public class Towns {
 
-    private List<Town> towns;
+    private List<TownDto> towns;
 }
