@@ -32,8 +32,17 @@ public class UserService {
         }
         User user = userMapper.createUser(userDto);
         userMapper.setRoleForUser(role, user);
-        userRepository.save(user);
-        return user;
+        return userRepository.save(user);
+    }
+
+    //move to mapper
+    public UserDto createUserWithRole(UserDto userDto, Role role) {
+        final User userSaved = createUser(userDto, role);
+        return UserDto.builder().phoneNumber(userSaved.getPhoneNumber())
+                .firstName(userSaved.getFirstName())
+                .lastName(userSaved.getLastName())
+                .password("*****")
+                .email(userSaved.getEmail()).build();
     }
 
     public void updateUser(User user) {
@@ -43,5 +52,4 @@ public class UserService {
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
-
 }

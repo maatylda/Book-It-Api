@@ -2,7 +2,6 @@ package pl.book.it.api.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.domain.User;
@@ -20,14 +19,13 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/create")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> createUser(@Valid @RequestBody final UserDto userDto) {
-        final User user = userService.createUser(userDto, Role.USER);
-        return ResponseEntity.ok(user);
+    public UserDto createUser(@Valid @RequestBody final UserDto userDto) {
+        return userService.createUserWithRole(userDto, Role.USER);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     public void deleteUser(User user) {
         userService.deleteUser(user);
     }

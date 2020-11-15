@@ -10,9 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 @Builder
+@ToString(exclude = {"user","place","room"})
+@EqualsAndHashCode(exclude = {"user","place","room"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "bookings")
@@ -57,39 +58,4 @@ public class Booking {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "id=" + id +
-                ", dateFrom=" + dateFrom +
-                ", dateTo=" + dateTo +
-                ", price=" + price +
-                ", isPaid=" + isPaid +
-                ", user=" + user +
-                ", place=" + place +
-                ", room=" + room +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return id.equals(booking.id) &&
-                dateFrom.equals(booking.dateFrom) &&
-                dateTo.equals(booking.dateTo) &&
-                Objects.equals(price, booking.price) &&
-                user.equals(booking.user) &&
-                place.equals(booking.place) &&
-                room.equals(booking.room) &&
-                createDate.equals(booking.createDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, dateFrom, dateTo, price, user, place, room, createDate);
-    }
 }

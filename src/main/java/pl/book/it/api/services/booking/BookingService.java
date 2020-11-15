@@ -82,5 +82,4 @@ public class BookingService {
     public List<Booking> bookingsForRoomInGivenDates(LocalDate chosenDateFrom, LocalDate chosenDateTo, Long roomId) {
         return bookingRepository.findAllBookingsForRoomInDates(chosenDateFrom, chosenDateTo, roomId);
     }
-
 }
