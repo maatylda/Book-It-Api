@@ -27,7 +27,7 @@ public class DbInitializer {
     private final BookingRepository bookingRepository;
     private final UserService userService;
 
-    @EventListener(ContextRefreshedEvent.class)
+    @EventListener(value = ContextRefreshedEvent.class)
     public void onEvent() {
         if (userRepository.count() > 0) {
             return;

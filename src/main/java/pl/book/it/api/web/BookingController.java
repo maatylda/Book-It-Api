@@ -24,26 +24,25 @@ import java.security.Principal;
 public class BookingController {
 
     private final BookingService bookingService;
-    private final RoomService roomService;
 
     @PostMapping
-    public ResponseEntity<Booking> createBooking(@Valid @RequestBody BookingDto bookingDto) throws URISyntaxException {
+    public ResponseEntity<BookingDto> createBooking(@Valid @RequestBody BookingDto bookingDto) throws URISyntaxException {
         if (bookingService.bookingsForRoomInGivenDates(bookingDto.getDateFrom(), bookingDto.getDateTo(), bookingDto.getRoomId()).size() > 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } else {
-            final Booking booking = bookingService.createBooking(bookingDto);
+            final BookingDto createdBookingDto = bookingService.createBookingAndReturnCreated(bookingDto);
             return ResponseEntity
-                    .created(new URI(WebConstants.API_BOOKINGS_PATH + booking.getId()))
-                    .body(booking);
+                    .created(new URI(WebConstants.API_BOOKINGS_PATH + createdBookingDto.getId()))
+                    .body(createdBookingDto);
         }
     }
 
     //to mogłoby być zrobione jako aspekt :)
     @GetMapping
-    public Bookings getAllUsersBookings(@RequestBody String email, @AuthenticationPrincipal Principal principal) {
+    public Bookings getAllUsersBookings(@RequestParam String email, @AuthenticationPrincipal Principal principal) {
         //zwróci nazwę użytkownika, moze być nullem
         //final Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new Bookings(bookingService.getAllUsersBookings(email));
+        return bookingService.getAllUsersBookings(email);
     }
 
     @DeleteMapping("/{bookingId}")

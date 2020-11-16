@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class RoomDto {
 
+    private Long id;
+
     @Enumerated(value = EnumType.STRING)
     private RoomStandard standard;
 

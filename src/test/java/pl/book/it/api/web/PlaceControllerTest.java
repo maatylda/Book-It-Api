@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pl.book.it.api.bootstrap.TestConsts;
+import pl.book.it.api.model.Dto.PlaceDto;
 import pl.book.it.api.model.Places;
 
 import java.nio.charset.StandardCharsets;
@@ -25,12 +26,12 @@ class PlaceControllerTest extends AbstractSpringTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.places").isArray())
                 .andExpect(jsonPath("$.places", hasSize(2)))
-                .andExpect(jsonPath("$.places[0].town.name", equalTo(TestConsts.TOWN_NAME_1)))
-                .andExpect(jsonPath("$.places[1].town.name", equalTo(TestConsts.TOWN_NAME_2)))
+                .andExpect(jsonPath("$.places[0].townName", equalTo(TestConsts.TOWN_NAME_1)))
+                .andExpect(jsonPath("$.places[1].townName", equalTo(TestConsts.TOWN_NAME_2)))
                 .andReturn();
         final String contentAsString = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
         final Places places = objectMapper.readValue(contentAsString, Places.class);
-        assertThat(places.getPlaces().stream().map(p -> p.getTown().getName()).collect(Collectors.toList()))
+        assertThat(places.getPlaces().stream().map(PlaceDto::getTownName).collect(Collectors.toList()))
                 .contains(TestConsts.TOWN_NAME_1)
                 .contains(TestConsts.TOWN_NAME_2);
         assertThat(places.getPlaces().size()).isEqualTo(2);
@@ -45,7 +46,7 @@ class PlaceControllerTest extends AbstractSpringTest {
                 .andReturn();
         final String contentAsString = mvcResult.getResponse().getContentAsString();
         final Places places = objectMapper.readValue(contentAsString, Places.class);
-        assertThat(places.getPlaces().stream().map(p -> p.getTown().getName()).collect(Collectors.toList()))
+        assertThat(places.getPlaces().stream().map(p -> p.getTownName()).collect(Collectors.toList()))
                 .contains(TestConsts.TOWN_NAME_1);
         assertThat(places.getPlaces().size()).isEqualTo(1);
     }

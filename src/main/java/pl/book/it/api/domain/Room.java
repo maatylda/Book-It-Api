@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,6 +42,8 @@ public class Room {
     private Place place;
 
     @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany
     @JoinColumn(name = "room_id")
     private List<Booking> bookings;
@@ -57,33 +58,4 @@ public class Room {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Room room = (Room) o;
-        return id.equals(room.id) &&
-                standard == room.standard &&
-                roomType == room.roomType &&
-                place.equals(room.place) &&
-                createDate.equals(room.createDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, standard, roomType, place, createDate);
-    }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "id=" + id +
-                ", standard=" + standard +
-                ", roomType=" + roomType +
-                ", price=" + price +
-                ", place=" + place +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                '}';
-    }
 }
