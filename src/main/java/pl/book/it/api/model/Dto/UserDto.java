@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 public class UserDto {
 
     @Email
-    @UniqueElements
     private String email;
     @NotNull
     private String firstName;

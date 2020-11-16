@@ -3,7 +3,7 @@ package pl.book.it.api.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.book.it.api.domain.Booking;
+import pl.book.it.api.model.Dto.BookingDto;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Bookings {
-    private List<Booking> bookings;
+    private List<BookingDto> bookings;
 }

@@ -14,20 +14,26 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class PlaceDto {
 
+    private Long id;
+
     @NotNull
     private String name;
+
     @NotNull
     private String description;
+
     @NotNull
     private String phoneNumber;
+
     @NotNull
     private String street;
+
     @NotNull
     private String streetNumber;
+
     @NotNull
     private String zipCode;
+
     @NotNull
     private String townName;
-
-
 }

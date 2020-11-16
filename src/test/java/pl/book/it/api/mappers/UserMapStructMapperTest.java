@@ -52,6 +52,7 @@ class UserMapStructMapperTest extends AbstractSpringTest {
                 .build();
 
         UserDto actualUserDto = userMapStructMapper.toUserDto(user);
+
         assertThat(actualUserDto.getEmail()).isEqualTo(userDto.getEmail());
         assertThat(actualUserDto.getPassword()).isEqualTo("***** ***");
     }

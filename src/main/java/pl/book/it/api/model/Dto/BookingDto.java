@@ -21,6 +21,8 @@ public class BookingDto {
 
     // jak zwalidować źle wpisaną datę? obsłużyć wyjątek DateTimeParseException?
     // to nie jest sytuacja którą użytkownik powinien dostać na twarz :)
+    private Long id;
+
     @NotNull
     private LocalDate dateFrom;
 

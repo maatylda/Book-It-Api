@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,11 +42,15 @@ public class Place {
     @ManyToOne
     private Town town;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany
     @JoinColumn(name = "place_id")
     private List<Room> rooms;
 
     @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany
     @JoinColumn(name = "pictures")
     private List<Picture> pictures;
@@ -62,40 +65,4 @@ public class Place {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Place place = (Place) o;
-        return id.equals(place.id) &&
-                name.equals(place.name) &&
-                Objects.equals(phoneNumber, place.phoneNumber) &&
-                Objects.equals(street, place.street) &&
-                Objects.equals(streetNumber, place.streetNumber) &&
-                Objects.equals(zipCode, place.zipCode) &&
-                town.equals(place.town) &&
-                createDate.equals(place.createDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, phoneNumber, street, streetNumber, zipCode, town, createDate);
-    }
-
-    @Override
-    public String toString() {
-        return "Place{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", street='" + street + '\'' +
-                ", streetNumber='" + streetNumber + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                ", town=" + town +
-                ", pictures=" + pictures +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                '}';
-    }
 }

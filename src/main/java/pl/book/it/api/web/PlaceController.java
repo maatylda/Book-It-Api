@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
-import pl.book.it.api.domain.Place;
+import pl.book.it.api.model.Dto.PlaceDto;
 import pl.book.it.api.model.Places;
 import pl.book.it.api.services.place.PlaceService;
 
@@ -20,24 +20,24 @@ public class PlaceController {
 
     @GetMapping
     public Places getAllPlaces() {
-        return new Places(placeService.findAllPlaces());
+        return placeService.findAllPlaces();
     }
 
     @GetMapping(path = "/towns/{townName}")
     public Places getPlacesByTown(@PathVariable String townName) {
-        return new Places(placeService.findAllPlacesInTown(townName));
+        return placeService.findAllPlacesInTown(townName);
     }
 
     @GetMapping(path = "/search")
     public Places getPlacesByTownAvailableInDates(@RequestParam(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
                                                   @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                                   @RequestParam(name = "town") String townName) {
-        return new Places(placeService.findAllPlacesInTownAvailableInDates(dateFrom, dateTo, townName));
+        return placeService.findAllPlacesInTownAvailableInDates(dateFrom, dateTo, townName);
     }
 
     @GetMapping(path = "/{id}")
-    public Place getPlaceById(@PathVariable Long id) {
-        return placeService.findPlaceById(id);
+    public PlaceDto getPlaceById(@PathVariable Long id) {
+        return placeService.findPlaceDtoByPlaceId(id);
     }
 
 

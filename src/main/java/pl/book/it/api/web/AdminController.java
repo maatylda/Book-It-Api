@@ -28,6 +28,7 @@ public class AdminController {
     private final TownService townService;
     private final RoomService roomService;
 
+    //todo
     @PostMapping("/places")
     public ResponseEntity<Place> createPlace(@Valid @RequestBody PlaceDto placeDto) throws URISyntaxException {
         final Place place = placeService.createPlace(placeDto);
