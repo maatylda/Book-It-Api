@@ -9,11 +9,11 @@ import pl.book.it.api.model.Dto.UserDto;
 public interface UserMapStructMapper {
 
     //czy to jest ok?
-    @Mapping(target = "password",constant = "***** ***")
-    UserDto toUserDto (User user);
+    @Mapping(target = "password", constant = "***** ***")
+    UserDto toUserDto(User user);
 
-    @Mapping(target = "password",ignore = true)
-    User toUser (UserDto userDto);
+    @Mapping(target = "password", ignore = true)
+    User toUser(UserDto userDto);
 
 
 }

@@ -29,22 +29,20 @@ public class BookingService {
     private final BookingMapper bookingMapper;
 
     public Booking createBooking(BookingDto bookingDto) {
-        final Booking booking = bookingMapper.toBooking(bookingDto);
-        final Double bookingPrice = calculateBookingPrice(booking);
-        booking.setPrice(bookingPrice);
-        booking.setPaid(false);
-        userService.saveUser(booking.getUser());
-        roomService.updateRoom(booking.getRoom());
-        return bookingRepository.save(booking);
+        final Booking savedBooking = bookingMapper.toBooking(bookingDto);
+        savedBooking.setPrice(calculateBookingPrice(bookingDto));
+        savedBooking.setPaid(false);
+        return bookingRepository.save(savedBooking);
     }
 
     public BookingDto createBookingAndReturnCreated(BookingDto bookingDto) {
-        return bookingMapper.toBookingDto(createBooking(bookingDto));
+        final Booking booking = createBooking(bookingDto);
+        return bookingMapper.toBookingDto(booking);
     }
 
-    public Double calculateBookingPrice(Booking booking) {
-        final long daysBooked = ChronoUnit.DAYS.between(booking.getDateFrom(), booking.getDateTo());
-        final Room room = booking.getRoom();
+    public Double calculateBookingPrice(BookingDto bookingDto) {
+        final long daysBooked = ChronoUnit.DAYS.between(bookingDto.getDateFrom(), bookingDto.getDateTo());
+        final Room room = roomService.findRoomById(bookingDto.getRoomId());
         final Double priceForNight = room.getPrice();
         return daysBooked * priceForNight;
     }

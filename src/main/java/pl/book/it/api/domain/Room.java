@@ -10,7 +10,6 @@ import pl.book.it.api.model.room.specifications.RoomType;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @Builder

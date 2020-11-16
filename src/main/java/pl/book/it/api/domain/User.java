@@ -9,8 +9,6 @@ import pl.book.it.api.model.user.specifications.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -9,7 +9,7 @@ import pl.book.it.api.model.Dto.RoomDto;
 @Mapper(config = IgnoreUnmappedMapperConfig.class)
 public interface RoomMapStructMapper {
 
-    @Mapping(source= "place.id", target = "placeId")
+    @Mapping(source = "place.id", target = "placeId")
     RoomDto toRoomDto(Room room);
 
     @InheritInverseConfiguration

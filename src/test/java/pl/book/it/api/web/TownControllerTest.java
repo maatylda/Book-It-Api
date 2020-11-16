@@ -23,7 +23,9 @@ class TownControllerTest extends AbstractSpringTest {
                 .andExpect(jsonPath("$.towns[0].name", equalTo(TestConsts.TOWN_NAME_1)))
                 .andExpect(jsonPath("$.towns[1].name", equalTo(TestConsts.TOWN_NAME_2)))
                 .andReturn();
-     /*           final String townsAsString = mvcResult.getResponse().getContentAsString();
+    }
+}/*
+           final String townsAsString = mvcResult.getResponse().getContentAsString();
         final Towns actualTowns = objectMapper.readValue(townsAsString, Towns.class);
 
         assertThat(actualTowns.getTowns()).hasSize(2);
@@ -32,5 +34,5 @@ class TownControllerTest extends AbstractSpringTest {
                 .collect(Collectors.toList()))
                 .contains(TestConsts.TOWN_NAME_1)
                 .contains(TestConsts.TOWN_NAME_2);*/
-    }
-}
+
+
