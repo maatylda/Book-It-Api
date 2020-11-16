@@ -33,7 +33,7 @@ public class Booking {
     private Double price;
 
     @Column(name = "is_paid")
-    private boolean isPaid;
+    private boolean paid;
 
     @JsonIgnore
     @ManyToOne
@@ -56,5 +56,4 @@ public class Booking {
     @Column(name = "update_date")
     @UpdateTimestamp
     private LocalDateTime updateDate;
-
 }

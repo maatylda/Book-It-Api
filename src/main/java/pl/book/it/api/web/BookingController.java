@@ -6,11 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
-import pl.book.it.api.domain.Booking;
 import pl.book.it.api.model.Bookings;
 import pl.book.it.api.model.Dto.BookingDto;
 import pl.book.it.api.services.booking.BookingService;
-import pl.book.it.api.services.room.RoomService;
 
 import javax.validation.Valid;
 import java.net.URI;

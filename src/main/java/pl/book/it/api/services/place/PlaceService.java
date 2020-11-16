@@ -56,7 +56,8 @@ public class PlaceService {
         return findOptionalPlaceNById(id).orElseThrow(() ->
                 new BookItException(String.format("Place with given id %s does not exist", id)));
     }
-    public PlaceDto findPlaceDtoByPlaceId(Long id){
+
+    public PlaceDto findPlaceDtoByPlaceId(Long id) {
         return placeMapStructMapper.toPlaceDto(findPlaceById(id));
     }
 

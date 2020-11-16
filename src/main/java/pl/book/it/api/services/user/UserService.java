@@ -37,7 +37,7 @@ public class UserService {
         }
         final User user = userMapStructMapper.toUser(userDto);
         user.setBookings(new ArrayList<>());
-        encodeAndSetPassword(userDto,user);
+        encodeAndSetPassword(userDto, user);
         setRoleForUser(role, user);
         return userRepository.save(user);
     }

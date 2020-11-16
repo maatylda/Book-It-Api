@@ -9,9 +9,9 @@ import pl.book.it.api.model.Dto.PlaceDto;
 @Mapper(config = IgnoreUnmappedMapperConfig.class)
 public interface PlaceMapStructMapper {
 
-    @Mapping(source = "townName",target = "town.name")
-    Place toPlace (PlaceDto placeDto);
+    @Mapping(source = "townName", target = "town.name")
+    Place toPlace(PlaceDto placeDto);
 
     @InheritInverseConfiguration
-    PlaceDto toPlaceDto (Place place);
+    PlaceDto toPlaceDto(Place place);
 }

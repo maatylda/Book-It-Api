@@ -11,7 +11,6 @@ import pl.book.it.api.model.Rooms;
 import pl.book.it.api.repositories.RoomRepository;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,7 +31,7 @@ public class RoomService {
     //TODO fix it in RoomRepository!!!
     public Rooms findAllRoomsInPlaceAvailableInDates(LocalDate dateFrom, LocalDate dateTo, Long placeId) {
         return new Rooms(roomRepository.findRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId).stream()
-        .map(roomMapStructMapper::toRoomDto).collect(Collectors.toList()));
+                .map(roomMapStructMapper::toRoomDto).collect(Collectors.toList()));
     }
 
     public Room createRoom(RoomDto roomDto) {
