@@ -19,7 +19,7 @@ public class RoomController {
 
     @GetMapping("/{placeId}/rooms")
     public Rooms getRoomsInPlace(@PathVariable Long placeId) {
-        return new Rooms(roomService.findAllRoomsInPlace(placeId));
+        return roomService.findAllRoomsInPlace(placeId);
     }
 
     //TODO fix it later in RoomRepository!!!
@@ -28,7 +28,7 @@ public class RoomController {
     public Rooms getRoomsAvailableInDates(@RequestParam(name = "dateFrom") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
                                           @RequestParam(name = "dateTo") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                           @PathVariable Long placeId) {
-        return new Rooms(roomService.findAllRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId));
+        return roomService.findAllRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId);
     }
 
 }

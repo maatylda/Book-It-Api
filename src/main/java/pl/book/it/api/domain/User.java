@@ -40,19 +40,19 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "birth_date")
+   /* @Column(name = "birth_date")
     @Past
-    private LocalDate birthDate;
+    private LocalDate birthDate;*/
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "user")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @OneToMany
+    @JoinColumn(name = "user")
     private List<Booking> bookings;
 
     @JsonIgnore

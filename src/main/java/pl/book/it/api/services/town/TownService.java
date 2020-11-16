@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Town;
 import pl.book.it.api.exceptions.BookItException;
+import pl.book.it.api.mappers.TownMapper;
 import pl.book.it.api.model.Dto.TownDto;
 import pl.book.it.api.repositories.TownRepository;
 
@@ -21,7 +22,7 @@ public class TownService {
     private final TownMapper townMapper;
 
     public List<TownDto> getAllTownsDto() {
-        return getAllTowns().stream().map(town -> townMapper.toTownDto(town)).collect(Collectors.toList());
+        return getAllTowns().stream().map(townMapper::toTownDto).collect(Collectors.toList());
     }
 
     public List<Town> getAllTowns() {

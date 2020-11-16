@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserDto {
 
+    @Email
+    @UniqueElements
+    private String email;
     @NotNull
     private String firstName;
     @NotNull
@@ -24,11 +28,7 @@ public class UserDto {
     private String phoneNumber;
     @Length(min = 8)
     private String password;
-    @Email
-    private String email;
 
-
-//    private LocalDate birthDate;
-
+//  private LocalDate birthDate;
 
 }

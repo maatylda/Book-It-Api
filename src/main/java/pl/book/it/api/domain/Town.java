@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,6 +25,8 @@ public class Town {
     private String name;
 
     @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany
     @JoinColumn(name = "town_id")
     private List<Place> places;
@@ -40,18 +41,4 @@ public class Town {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Town town = (Town) o;
-        return id.equals(town.id) &&
-                name.equals(town.name) &&
-                createDate.equals(town.createDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, createDate);
-    }
 }

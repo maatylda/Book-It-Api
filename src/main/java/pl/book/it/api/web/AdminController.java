@@ -10,9 +10,9 @@ import pl.book.it.api.domain.Town;
 import pl.book.it.api.model.Dto.PlaceDto;
 import pl.book.it.api.model.Dto.RoomDto;
 import pl.book.it.api.model.Dto.TownDto;
-import pl.book.it.api.services.town.TownService;
 import pl.book.it.api.services.place.PlaceService;
 import pl.book.it.api.services.room.RoomService;
+import pl.book.it.api.services.town.TownService;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -55,6 +55,4 @@ public class AdminController {
         return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places/" + place.getId()))
                 .body(room);
     }
-
-
 }

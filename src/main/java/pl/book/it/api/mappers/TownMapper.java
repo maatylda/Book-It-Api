@@ -1,4 +1,4 @@
-package pl.book.it.api.services.town;
+package pl.book.it.api.mappers;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

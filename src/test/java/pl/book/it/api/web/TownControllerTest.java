@@ -4,12 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import pl.book.it.api.bootstrap.TestConsts;
-import pl.book.it.api.domain.Town;
-import pl.book.it.api.model.Towns;
 
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.User;
 import pl.book.it.api.exceptions.BookItException;
+import pl.book.it.api.mappers.UserMapStructMapper;
 import pl.book.it.api.model.Dto.UserDto;
 import pl.book.it.api.model.user.specifications.Role;
 import pl.book.it.api.repositories.UserRepository;
@@ -16,6 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final UserMapStructMapper userMapStructMapper;
 
     public boolean accountWithEmailExists(String email) {
         return userRepository.findById(email).isPresent();
@@ -30,19 +32,14 @@ public class UserService {
         if (accountWithEmailExists(userDto.getEmail())) {
             throw new BookItException(String.format("There is already user with email: %s, chose another email.", userDto.getEmail()), 101);
         }
-        User user = userMapper.createUser(userDto);
+        final User user = userMapStructMapper.toUser(userDto);
         userMapper.setRoleForUser(role, user);
         return userRepository.save(user);
     }
 
-    //move to mapper
     public UserDto createUserWithRole(UserDto userDto, Role role) {
         final User userSaved = createUser(userDto, role);
-        return UserDto.builder().phoneNumber(userSaved.getPhoneNumber())
-                .firstName(userSaved.getFirstName())
-                .lastName(userSaved.getLastName())
-                .password("*****")
-                .email(userSaved.getEmail()).build();
+        return userMapStructMapper.toUserDto(userSaved);
     }
 
     public void updateUser(User user) {

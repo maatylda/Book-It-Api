@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.book.it.api.domain.Room;
+import pl.book.it.api.model.Dto.RoomDto;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rooms {
-    private List<Room> rooms;
+    private List<RoomDto> rooms;
 }
