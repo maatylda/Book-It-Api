@@ -5,5 +5,4 @@ import pl.book.it.api.domain.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 
-
 }

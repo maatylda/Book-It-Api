@@ -14,6 +14,4 @@ public interface UserMapStructMapper {
 
     @Mapping(target = "password", ignore = true)
     User toUser(UserDto userDto);
-
-
 }

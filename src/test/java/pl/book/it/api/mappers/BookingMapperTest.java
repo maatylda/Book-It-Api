@@ -1,4 +1,3 @@
-
 package pl.book.it.api.mappers;
 
 import org.junit.jupiter.api.Test;
@@ -66,14 +65,14 @@ class BookingMapperTest extends AbstractSpringTest {
                         .place(place)
                         .user(user)
                         .room(room)
-                        .dateFrom(LocalDate.of(2020,12,10))
-                        .dateTo(LocalDate.of(2020,12,15))
+                        .dateFrom(LocalDate.of(2020, 12, 10))
+                        .dateTo(LocalDate.of(2020, 12, 15))
                         .build());
 
         final BookingDto bookingDto = bookingMapper.toBookingDto(booking);
 
-        assertThat(bookingDto.getDateFrom()).isEqualTo(LocalDate.of(2020,12,10));
-        assertThat(bookingDto.getDateTo()).isEqualTo(LocalDate.of(2020,12,15));
+        assertThat(bookingDto.getDateFrom()).isEqualTo(LocalDate.of(2020, 12, 10));
+        assertThat(bookingDto.getDateTo()).isEqualTo(LocalDate.of(2020, 12, 15));
         assertThat(bookingDto.getPlaceId()).isEqualTo(place.getId());
         assertThat(bookingDto.getRoomId()).isEqualTo(room.getId());
         assertThat(bookingDto.getUserEmail()).isEqualTo(TestConsts.EMAIL_1);

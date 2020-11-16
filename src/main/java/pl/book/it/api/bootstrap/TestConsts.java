@@ -33,5 +33,4 @@ public interface TestConsts {
     LocalDate BOOKING_DATE_TO_5 = LocalDate.of(2020, 11, 2);
 
     Double PRICE_1 = 200.10;
-
 }

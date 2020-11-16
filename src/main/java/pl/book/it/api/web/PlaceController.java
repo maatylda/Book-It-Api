@@ -40,5 +40,4 @@ public class PlaceController {
         return placeService.findPlaceDtoByPlaceId(id);
     }
 
-
 }

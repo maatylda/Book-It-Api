@@ -9,8 +9,9 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//zmienić nazwę klasy
 public class ErrorMessage {
-    //zmienić nazwę klasy
+
     private Integer httpStatus;
     private String message;
     private Integer code;
@@ -26,6 +27,5 @@ public class ErrorMessage {
     public ErrorMessage(Map<String, String> errors) {
         this.errors = errors;
     }
-
 }
 

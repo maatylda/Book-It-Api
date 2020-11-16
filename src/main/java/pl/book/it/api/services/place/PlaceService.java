@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
-    private final PlaceMapper placeMapper;
     private final PlaceMapStructMapper placeMapStructMapper;
 
     public Places findAllPlaces() {
@@ -62,7 +61,7 @@ public class PlaceService {
     }
 
     public Place createPlace(PlaceDto placeDto) {
-        final Place place = placeMapper.createPlace(placeDto);
+        final Place place = placeMapStructMapper.toPlace(placeDto);
         return placeRepository.save(place);
     }
 
@@ -71,7 +70,7 @@ public class PlaceService {
         placeRepository.delete(place);
     }
 
-    public void updatePlace(Place place) {
+    public void savePlace(Place place) {
         placeRepository.save(place);
     }
 }

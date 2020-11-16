@@ -17,8 +17,5 @@ public class ExistingUserValidator implements ConstraintValidator<ExistingUser, 
     @Override
     public boolean isValid(String userEmail, ConstraintValidatorContext constraintValidatorContext) {
         return userEmail != null && userService.accountWithEmailExists(userEmail);
-
     }
-
-
 }

@@ -32,7 +32,5 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
                                                  @Param("chosen_date_to") LocalDate chosenDateTo,
                                                  @Param("town_name") String town);
 
-
     Optional<Place> findById(Long id);
-
 }

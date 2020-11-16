@@ -52,7 +52,7 @@ public class AdminController {
     public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomDto roomDto) throws URISyntaxException {
         final Place place = placeService.findPlaceById(roomDto.getPlaceId());
         final Room room = roomService.createRoom(roomDto);
-        placeService.updatePlace(place);
+        placeService.savePlace(place);
         return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places/" + place.getId()))
                 .body(room);
     }

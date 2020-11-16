@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import pl.book.it.api.annotations.EmailNotTaken;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 public class UserDto {
 
     @Email
+    @EmailNotTaken
     private String email;
     @NotNull
     private String firstName;
@@ -26,7 +28,4 @@ public class UserDto {
     private String phoneNumber;
     @Length(min = 8)
     private String password;
-
-//  private LocalDate birthDate;
-
 }
