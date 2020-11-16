@@ -1,4 +1,4 @@
-package pl.book.it.api.services.room;
+package pl.book.it.api.mappers;
 
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,6 @@ public class RoomMapper {
                 .bookings(new ArrayList<>())
                 .build();
     }
-
 
     private Place getPlace(Long placeId) {
         return placeRepository.getOne(placeId);

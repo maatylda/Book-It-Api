@@ -1,4 +1,4 @@
-package pl.book.it.api.services.place;
+package pl.book.it.api.mappers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -30,14 +30,11 @@ public class PlaceMapper {
                 .pictures(new ArrayList<>())
                 .rooms(new ArrayList<>())
                 .build();
-
-
     }
 
     private Town getTown(PlaceDto placeDto) {
         return townService.getTownByName(placeDto.getTownName().toUpperCase()).get();
     }
-
 //    private Town getTownFromForm(PlaceDto placeForm) {
 //        if(townService.isTownAlreadyExistInDatabase(placeForm.getTownName())){
 //             return townService.getTownByName(placeForm.getTownName());

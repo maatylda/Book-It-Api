@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ApiErrors {
+
     USER_WITH_GIVEN_EMAIL_ALREADY_EXIST("101", "api.error.user.email.taken"),
     USER_NOT_FOUND("102", "api.error.user.not.found"),
     ROOM_NOT_FOUND("201", "api.error.room.not.found"),
@@ -20,5 +21,4 @@ public enum ApiErrors {
         this.code = code;
         this.message = message;
     }
-
 }

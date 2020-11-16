@@ -29,13 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .logout()
-//                .and()
-//                .csrf().ignoringAntMatchers("/h2/**")
+//     .and()
+//     .csrf().ignoringAntMatchers("/h2/**")
                 .and()
-                //temporary
+//     temporary
                 .csrf().disable()
                 .headers().frameOptions().disable();
     }
-
-
 }

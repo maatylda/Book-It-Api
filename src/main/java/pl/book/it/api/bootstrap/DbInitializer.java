@@ -79,5 +79,4 @@ public class DbInitializer {
                 .email(email).password(password).phoneNumber(phoneNumb).build();
         return userService.createUser(userDto, Role.ADMIN);
     }
-
 }

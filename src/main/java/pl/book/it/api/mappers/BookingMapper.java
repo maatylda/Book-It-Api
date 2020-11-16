@@ -19,6 +19,4 @@ public interface BookingMapper {
 
     @InheritInverseConfiguration
     Booking toBooking(BookingDto bookingDto);
-
-
 }

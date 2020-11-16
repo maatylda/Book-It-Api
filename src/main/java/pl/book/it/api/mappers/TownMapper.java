@@ -15,5 +15,4 @@ public interface TownMapper {
 
     @InheritInverseConfiguration
     TownDto toTownDto(Town town);
-
 }

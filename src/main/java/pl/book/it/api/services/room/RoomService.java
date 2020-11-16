@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Room;
 import pl.book.it.api.exceptions.BookItException;
 import pl.book.it.api.mappers.RoomMapStructMapper;
+import pl.book.it.api.mappers.RoomMapper;
 import pl.book.it.api.model.Dto.RoomDto;
 import pl.book.it.api.model.Rooms;
 import pl.book.it.api.repositories.RoomRepository;
