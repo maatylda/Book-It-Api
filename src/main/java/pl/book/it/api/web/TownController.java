@@ -17,7 +17,7 @@ public class TownController {
     private final TownService townService;
 
     @GetMapping
-    public Towns getAllTowns() {
+    public Towns showAllTowns() {
         return new Towns(townService.getAllTownsDto());
     }
 }

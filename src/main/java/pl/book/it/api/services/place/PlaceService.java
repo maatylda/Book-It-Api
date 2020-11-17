@@ -4,13 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.Place;
+import pl.book.it.api.domain.Town;
 import pl.book.it.api.exceptions.BookItException;
 import pl.book.it.api.mappers.PlaceMapStructMapper;
 import pl.book.it.api.model.Dto.PlaceDto;
 import pl.book.it.api.model.Places;
 import pl.book.it.api.repositories.PlaceRepository;
+import pl.book.it.api.services.town.TownService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,6 +24,7 @@ public class PlaceService {
 
     private final PlaceRepository placeRepository;
     private final PlaceMapStructMapper placeMapStructMapper;
+    private final TownService townService;
 
     public Places findAllPlaces() {
         return new Places(placeRepository.findAll()
@@ -53,16 +57,31 @@ public class PlaceService {
 
     public Place findPlaceById(Long id) {
         return findOptionalPlaceNById(id).orElseThrow(() ->
-                new BookItException(String.format("Place with given id %s does not exist", id)));
+                new BookItException("No place with given id", "placeId"));
     }
 
     public PlaceDto findPlaceDtoByPlaceId(Long id) {
         return placeMapStructMapper.toPlaceDto(findPlaceById(id));
     }
 
-    public Place createPlace(PlaceDto placeDto) {
+    public PlaceDto createPlace(PlaceDto placeDto) {
         final Place place = placeMapStructMapper.toPlace(placeDto);
-        return placeRepository.save(place);
+        setEmptyRoomsList(place);
+        setEmptyPicturesList(place);
+        final Town town = townService.getTownByNameOrElseThrow(placeDto.getTownName());
+        place.setTown(town);
+        town.getPlaces().add(place);
+        final Place savedPlace = placeRepository.save(place);
+        townService.saveTown(town);
+        return placeMapStructMapper.toPlaceDto(savedPlace);
+    }
+
+    private void setEmptyPicturesList(Place place) {
+        place.setPictures(new ArrayList<>());
+    }
+
+    private void setEmptyRoomsList(Place place) {
+        place.setRooms(new ArrayList<>());
     }
 
     public void deletePlace(Long placeId) {

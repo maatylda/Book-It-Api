@@ -1,31 +1,30 @@
 package pl.book.it.api.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 //zmienić nazwę klasy
 public class ErrorMessage {
 
-    private Integer httpStatus;
-    private String message;
-    private Integer code;
-
+    private Integer status;
     private Map<String, String> errors;
 
-    public ErrorMessage(Integer httpStatus, String message, Integer code) {
-        this.httpStatus = httpStatus;
-        this.message = message;
-        this.code = code;
+    public ErrorMessage(Integer status, Map<String, String> errors) {
+        this.errors = errors;
+        this.status = status;
     }
 
-    public ErrorMessage(Map<String, String> errors) {
-        this.errors = errors;
+    public ErrorMessage() {
+        this.errors = new HashMap<>();
+    }
+
+    public Integer getStatus() {
+        return Optional.ofNullable(status).orElse(HttpStatus.BAD_REQUEST.value());
     }
 }
 

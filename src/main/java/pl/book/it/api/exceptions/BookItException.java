@@ -2,18 +2,17 @@ package pl.book.it.api.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-import java.util.List;
 import java.util.Optional;
 
 public class BookItException extends RuntimeException {
-    private Integer code;
+    private String fieldName;
     private Integer status;
-    private List<String> messages;
+    private String messages;
 
-    public BookItException(Integer status, String message, Integer code) {
+    public BookItException(Integer status, String message, String fieldName) {
         super(message);
         this.status = status;
-        this.code = code;
+        this.fieldName = fieldName;
     }
 
     public BookItException(Integer status, String message) {
@@ -21,9 +20,9 @@ public class BookItException extends RuntimeException {
         this.status = status;
     }
 
-    public BookItException(String message, Integer code) {
+    public BookItException(String message, String fieldName) {
         super(message);
-        this.code = code;
+        this.fieldName = fieldName;
     }
 
     public BookItException() {
@@ -46,7 +45,11 @@ public class BookItException extends RuntimeException {
         return Optional.ofNullable(status).orElse(HttpStatus.BAD_REQUEST.value());
     }
 
-    public Integer getCode() {
-        return Optional.ofNullable(code).orElse(HttpStatus.BAD_REQUEST.value());
+    public String getFieldName() {
+        return fieldName;
     }
+
+//    public Integer getName() {
+//        return Optional.ofNullable(name).orElse(HttpStatus.BAD_REQUEST.value());
+//    }
 }
