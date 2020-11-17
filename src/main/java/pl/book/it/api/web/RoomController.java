@@ -25,8 +25,8 @@ public class RoomController {
     //TODO fix it later in RoomRepository!!!
     @GetMapping("/{placeId}/rooms/search")
     public Rooms showRoomsAvailableInDates(@RequestParam(name = "dateFrom") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
-                                          @RequestParam(name = "dateTo") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
-                                          @PathVariable Long placeId) {
+                                           @RequestParam(name = "dateTo") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
+                                           @PathVariable Long placeId) {
         return roomService.findAllRoomsInPlaceAvailableInDates(dateFrom, dateTo, placeId);
     }
 }

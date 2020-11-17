@@ -55,7 +55,7 @@ public class RoomService {
 
     public Room findRoomById(Long roomId) {
         return findOptionalRoomById(roomId).orElseThrow(() ->
-                new BookItException("Wrong room id","roomId"));
+                new BookItException("Wrong room id", "roomId"));
     }
 
     public boolean roomWithIdExist(Long id) {

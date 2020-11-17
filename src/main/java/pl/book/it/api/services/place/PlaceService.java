@@ -14,10 +14,8 @@ import pl.book.it.api.services.town.TownService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -43,12 +41,8 @@ public class PlaceService {
     }
 
     public Places findAllPlacesInTownAvailableInDates(LocalDate dateFrom, LocalDate dateTo, String townName) {
-        final List<Place> placesByRoomsWithNoBookings = placeRepository.findPlacesByRoomsWithNoBookings();
-        final List<Place> placesInTownAvailableInDates = placeRepository.findPlacesInTownAvailableInDates(dateFrom, dateTo, townName.toUpperCase());
-        List<Place> finalList = Stream
-                .concat(placesByRoomsWithNoBookings.stream(),placesInTownAvailableInDates.stream())
-                .collect(Collectors.toList());
-        return new Places(finalList.stream()
+        return new Places(placeRepository.findPlacesInTownAvailableInDates(dateFrom, dateTo, townName.toUpperCase())
+                .stream()
                 .map(placeMapStructMapper::toPlaceDto)
                 .collect(Collectors.toList()));
     }
@@ -63,7 +57,7 @@ public class PlaceService {
 
     public Place findPlaceById(Long id) {
         return findOptionalPlaceNById(id).orElseThrow(() ->
-                new BookItException("No place with given id","placeId"));
+                new BookItException("No place with given id", "placeId"));
     }
 
     public PlaceDto findPlaceDtoByPlaceId(Long id) {

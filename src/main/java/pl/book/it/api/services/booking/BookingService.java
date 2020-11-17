@@ -60,7 +60,7 @@ public class BookingService {
 
     public Booking findBookingIfItExist(Long id) {
         return bookingRepository.findById(id).orElseThrow(() ->
-                new BookItException("There is no booking with given id","bookingId"));
+                new BookItException("There is no booking with given id", "bookingId"));
     }
 
     public List<Booking> bookingsForRoomInGivenDates(LocalDate chosenDateFrom, LocalDate chosenDateTo, Long roomId) {
@@ -68,6 +68,6 @@ public class BookingService {
     }
 
     public BookingDto findBookingDtoById(Long id) {
-      return bookingMapper.toBookingDto(findBookingIfItExist(id));
+        return bookingMapper.toBookingDto(findBookingIfItExist(id));
     }
 }

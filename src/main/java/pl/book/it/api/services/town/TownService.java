@@ -34,9 +34,10 @@ public class TownService {
     public Optional<Town> getTownByNameOptional(String townName) {
         return townRepository.findByName(townName.toUpperCase());
     }
-    public Town getTownByNameOrElseThrow(String townName){
+
+    public Town getTownByNameOrElseThrow(String townName) {
         return getTownByNameOptional(townName).orElseThrow(() ->
-                new BookItException("There is no such Town "+ townName,"townName"));
+                new BookItException("There is no such Town " + townName, "townName"));
     }
 
     public Town createTown(String townName) {
@@ -46,9 +47,10 @@ public class TownService {
 
     public void checkIfTheTownExist(final String townName) {
         getTownByNameOptional(townName).orElseThrow(() ->
-                new BookItException("There is no such Town "+ townName,"townName"));
+                new BookItException("There is no such Town " + townName, "townName"));
     }
-    public Town saveTown(Town town){
+
+    public Town saveTown(Town town) {
         return townRepository.save(town);
     }
 }

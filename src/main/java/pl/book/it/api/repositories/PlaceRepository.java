@@ -25,8 +25,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
             "(b.dateFrom BETWEEN :chosen_date_from AND :chosen_date_to) OR " +
             "(b.dateTo BETWEEN :chosen_date_from AND :chosen_date_to) OR " +
             "(:chosen_date_from BETWEEN b.dateFrom AND b.dateTo) OR " +
-            "(:chosen_date_to BETWEEN b.dateFrom AND b.dateTo)" +
-            ") "
+            "(:chosen_date_to BETWEEN b.dateFrom AND b.dateTo) ) OR r NOT IN(SELECT r FROM b.room) "
     )
     List<Place> findPlacesInTownAvailableInDates(@Param("chosen_date_from") LocalDate chosenDateFrom,
                                                  @Param("chosen_date_to") LocalDate chosenDateTo,
@@ -34,10 +33,4 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
 
     Optional<Place> findById(Long id);
 
-    //tutaj coś tam trzeba zakombinować żeby pojawiały się pokoje w których nie ma rezerwacji
-    @Query(value = "SELECT p " +
-            "FROM places p " +
-            "LEFT JOIN FETCH p.rooms r " +
-            "WHERE r.bookings.size=0")
-    List<Place> findPlacesByRoomsWithNoBookings ();
 }

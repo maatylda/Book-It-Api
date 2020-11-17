@@ -11,9 +11,7 @@ import pl.book.it.api.annotations.HandledByBookItExceptionHandler;
 import pl.book.it.api.exceptions.BookItException;
 import pl.book.it.api.model.ErrorMessage;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestControllerAdvice(annotations = {HandledByBookItExceptionHandler.class})
 public class BIAExceptionHandler {
@@ -21,7 +19,7 @@ public class BIAExceptionHandler {
     @ExceptionHandler(BookItException.class)
     public ResponseEntity<ErrorMessage> handleBookItException(final BookItException exp) {
         final ErrorMessage errorMessage = new ErrorMessage();
-        errorMessage.getErrors().put(exp.getFieldName(),exp.getMessage());
+        errorMessage.getErrors().put(exp.getFieldName(), exp.getMessage());
         return ResponseEntity.status(exp.getStatus()).body(errorMessage);
     }
 

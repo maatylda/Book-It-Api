@@ -30,20 +30,21 @@ public class BookingController {
         } else {
             final BookingDto createdBookingDto = bookingService.createBookingAndReturnCreated(bookingDto);
             return ResponseEntity
-                    .created(new URI(WebConstants.API_BOOKINGS_PATH + createdBookingDto.getId()))
+                    .created(new URI(WebConstants.API_BOOKINGS_PATH + "/" + createdBookingDto.getId()))
                     .body(createdBookingDto);
         }
     }
 
     @GetMapping("/{id}")
-    public BookingDto showBookingDetails(@PathVariable Long id){
+    public BookingDto showBookingDetails(@PathVariable Long id) {
         return bookingService.findBookingDtoById(id);
     }
 
-    //to mogłoby być zrobione jako aspekt :)
+    //it could be made as aspect in future:)
     @GetMapping
     public Bookings showUserBookingsList(@RequestParam String email, @AuthenticationPrincipal Principal principal) {
-        //zwróci nazwę użytkownika, moze być nullem
+        //different solution for authentication
+        //it will return userName (it can be null)
         //final Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return bookingService.getAllUsersBookings(email);
     }

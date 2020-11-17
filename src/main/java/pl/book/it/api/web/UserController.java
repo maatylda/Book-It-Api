@@ -28,9 +28,9 @@ public class UserController {
     }
 
     @GetMapping
-    public UserDto showUserDetails(@AuthenticationPrincipal Principal principal){
+    public UserDto showUserDetails(@AuthenticationPrincipal Principal principal) {
         final String email = principal.getName();
-       return userService.findUserDtoById(email);
+        return userService.findUserDtoById(email);
     }
 
     @DeleteMapping

@@ -28,8 +28,9 @@ public class UserService {
 
     public User findUserById(String email) {
         return userRepository.findById(email).orElseThrow(() ->
-                new BookItException("There is no user with email: " + email,"email"));
+                new BookItException("There is no user with email: " + email, "email"));
     }
+
     public UserDto findUserDtoById(String email) {
         return userMapStructMapper.toUserDto(findUserById(email));
     }

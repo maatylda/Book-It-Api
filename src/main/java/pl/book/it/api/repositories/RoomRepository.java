@@ -12,7 +12,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     List<Room> findAllByPlace_Id(Long placeId);
 
-    //TODO fix wrong query
     @Query(value = "SELECT r " +
             "FROM rooms r " +
             "LEFT JOIN r.place p " +
@@ -23,19 +22,9 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             "(b.dateTo BETWEEN :chosen_date_from AND :chosen_date_to) OR " +
             "(:chosen_date_from BETWEEN b.dateFrom AND b.dateTo) OR " +
             "(:chosen_date_to BETWEEN b.dateFrom AND b.dateTo)" +
-            ") ")
+            ") OR r NOT IN(SELECT r FROM b.room)")
     List<Room> findRoomsInPlaceAvailableInDates(@Param("chosen_date_from") LocalDate chosenDateFrom,
                                                 @Param("chosen_date_to") LocalDate chosenDateTo,
                                                 @Param("place_id") Long placeId);
 
-//    @Query(value = "SELECT r FROM rooms r " +
-//            "JOIN r.bookings b " +
-//            "WHERE r.id =:room_id AND " +
-//            "NOT ((b.dateFrom BETWEEN :chosen_date_from AND :chosen_date_to) OR " +
-//            "            (b.dateTo BETWEEN :chosen_date_from AND :chosen_date_to) OR " +
-//            "            (:chosen_date_from BETWEEN b.dateFrom AND b.dateTo) OR " +
-//            "            (:chosen_date_to BETWEEN b.dateFrom AND b.dateTo)) ")
-//    Optional<Room> getRoomAvailableInDates(@Param("chosen_date_from") LocalDate chosenDateFrom,
-//                                           @Param("chosen_date_to") LocalDate chosenDateTo,
-//                                           @Param("room_id") Long roomId);
 }

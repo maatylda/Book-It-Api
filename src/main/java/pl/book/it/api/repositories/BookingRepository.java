@@ -11,7 +11,8 @@ import java.util.List;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query(value = "SELECT b FROM bookings b " +
-            "WHERE b.user.email =:email")
+            "LEFT JOIN FETCH b.user u " +
+            "WHERE u.email =:email")
     List<Booking> findAllBookingForUser(String email);
 
     //TODO check it again
