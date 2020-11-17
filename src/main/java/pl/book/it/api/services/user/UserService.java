@@ -28,12 +28,15 @@ public class UserService {
 
     public User findUserById(String email) {
         return userRepository.findById(email).orElseThrow(() ->
-                new BookItException("There is no user with email: " + email));
+                new BookItException("There is no user with email: " + email,"email"));
+    }
+    public UserDto findUserDtoById(String email) {
+        return userMapStructMapper.toUserDto(findUserById(email));
     }
 
     public User createUser(UserDto userDto, Role role) {
         if (accountWithEmailExists(userDto.getEmail())) {
-            throw new BookItException(String.format("There is already user with email: %s, chose another email.", userDto.getEmail()), 101);
+            throw new BookItException(String.format("There is already user with email: %s, chose another email.", userDto.getEmail()), "email");
         }
         final User user = userMapStructMapper.toUser(userDto);
         user.setBookings(new ArrayList<>());

@@ -19,24 +19,24 @@ public class PlaceController {
     private final PlaceService placeService;
 
     @GetMapping
-    public Places getAllPlaces() {
+    public Places showAllPlaces() {
         return placeService.findAllPlaces();
     }
 
     @GetMapping(path = "/towns/{townName}")
-    public Places getPlacesByTown(@PathVariable String townName) {
+    public Places showPlacesByTown(@PathVariable String townName) {
         return placeService.findAllPlacesInTown(townName);
     }
 
     @GetMapping(path = "/search")
-    public Places getPlacesByTownAvailableInDates(@RequestParam(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
+    public Places showPlacesByTownAvailableInDates(@RequestParam(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
                                                   @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                                   @RequestParam(name = "town") String townName) {
         return placeService.findAllPlacesInTownAvailableInDates(dateFrom, dateTo, townName);
     }
 
     @GetMapping(path = "/{id}")
-    public PlaceDto getPlaceById(@PathVariable Long id) {
+    public PlaceDto showPlaceDetails(@PathVariable Long id) {
         return placeService.findPlaceDtoByPlaceId(id);
     }
 

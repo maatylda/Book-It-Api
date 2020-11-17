@@ -28,7 +28,6 @@ public class RoomDto {
     @NotNull
     private Double price;
 
-    //maybe redundant?
     @NotNull
     private Long placeId;
 }

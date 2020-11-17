@@ -20,15 +20,16 @@ public class BIAExceptionHandler {
 
     @ExceptionHandler(BookItException.class)
     public ResponseEntity<ErrorMessage> handleBookItException(final BookItException exp) {
-        final ErrorMessage errorMessage = new ErrorMessage(exp.getStatus(), exp.getMessage(), exp.getCode());
+        final ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.getErrors().put(exp.getFieldName(),exp.getMessage());
         return ResponseEntity.status(exp.getStatus()).body(errorMessage);
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<ErrorMessage> handleMethodArgumentNotValidException(final MethodArgumentNotValidException exp) {
-        final Map<String, String> errorMessagesByFieldName = new HashMap<>();
+        final ErrorMessage errorMessage = new ErrorMessage();
         final List<FieldError> fieldErrors = exp.getBindingResult().getFieldErrors();
-        fieldErrors.forEach(fieldError -> errorMessagesByFieldName.put(fieldError.getField(), fieldError.getDefaultMessage()));
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(errorMessagesByFieldName));
+        fieldErrors.forEach(fieldError -> errorMessage.getErrors().put(fieldError.getField(), fieldError.getDefaultMessage()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
     }
 }

@@ -33,4 +33,11 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
                                                  @Param("town_name") String town);
 
     Optional<Place> findById(Long id);
+
+    //tutaj coś tam trzeba zakombinować żeby pojawiały się pokoje w których nie ma rezerwacji
+    @Query(value = "SELECT p " +
+            "FROM places p " +
+            "LEFT JOIN FETCH p.rooms r " +
+            "WHERE r.bookings.size=0")
+    List<Place> findPlacesByRoomsWithNoBookings ();
 }

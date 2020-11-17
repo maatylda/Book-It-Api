@@ -3,15 +3,17 @@ package pl.book.it.api.services.room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.book.it.api.domain.Place;
 import pl.book.it.api.domain.Room;
 import pl.book.it.api.exceptions.BookItException;
 import pl.book.it.api.mappers.RoomMapStructMapper;
-import pl.book.it.api.mappers.RoomMapper;
 import pl.book.it.api.model.Dto.RoomDto;
 import pl.book.it.api.model.Rooms;
 import pl.book.it.api.repositories.RoomRepository;
+import pl.book.it.api.services.place.PlaceService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,8 +23,8 @@ import java.util.stream.Collectors;
 public class RoomService {
 
     private final RoomRepository roomRepository;
-    private final RoomMapper roomMapper;
     private final RoomMapStructMapper roomMapStructMapper;
+    private final PlaceService placeService;
 
     public Rooms findAllRoomsInPlace(Long placeId) {
         return new Rooms(roomRepository.findAllByPlace_Id(placeId).stream()
@@ -35,15 +37,25 @@ public class RoomService {
                 .map(roomMapStructMapper::toRoomDto).collect(Collectors.toList()));
     }
 
-    public Room createRoom(RoomDto roomDto) {
-        final Room room = roomMapper.createRoom(roomDto, roomDto.getPlaceId());
-        roomRepository.save(room);
-        return room;
+    public RoomDto createRoom(RoomDto roomDto) {
+        final Room room = roomMapStructMapper.toRoom(roomDto);
+        setEmptyBookingsList(room);
+        final Room savedRoom = roomRepository.save(room);
+        final Place place = placeService.findPlaceById(roomDto.getPlaceId());
+        place.getRooms().add(savedRoom);
+        placeService.savePlace(place);
+
+
+        return roomMapStructMapper.toRoomDto(roomRepository.save(savedRoom));
+    }
+
+    private void setEmptyBookingsList(Room room) {
+        room.setBookings(new ArrayList<>());
     }
 
     public Room findRoomById(Long roomId) {
         return findOptionalRoomById(roomId).orElseThrow(() ->
-                new BookItException("Wrong room id. There is no room with given id"));
+                new BookItException("Wrong room id","roomId"));
     }
 
     public boolean roomWithIdExist(Long id) {

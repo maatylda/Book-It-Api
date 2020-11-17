@@ -30,10 +30,10 @@ public class AdminController {
 
     //todo
     @PostMapping("/places")
-    public ResponseEntity<Place> createPlace(@Valid @RequestBody PlaceDto placeDto) throws URISyntaxException {
-        final Place place = placeService.createPlace(placeDto);
-        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places" + place.getId()))
-                .body(place);
+    public ResponseEntity<PlaceDto> createPlace(@Valid @RequestBody PlaceDto placeDto) throws URISyntaxException {
+        final PlaceDto createdPlace = placeService.createPlace(placeDto);
+        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places" + createdPlace.getId()))
+                .body(createdPlace);
     }
 
     @DeleteMapping("/places/{id}")
@@ -48,12 +48,14 @@ public class AdminController {
                 .body(town);
     }
 
-    @PostMapping("/places/")
-    public ResponseEntity<Room> createRoomInPlace(@Valid @RequestBody RoomDto roomDto) throws URISyntaxException {
+    @PostMapping("/places/{placeId}/rooms")
+    public ResponseEntity<RoomDto> createRoomInPlace(@Valid @RequestBody RoomDto roomDto,@PathVariable Long placeId) throws URISyntaxException {
+        if (!placeId.equals(roomDto.getPlaceId())){
+           return ResponseEntity.badRequest().build();
+        }
         final Place place = placeService.findPlaceById(roomDto.getPlaceId());
-        final Room room = roomService.createRoom(roomDto);
+        RoomDto roomDto1 = roomService.createRoom(roomDto);
         placeService.savePlace(place);
-        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places/" + place.getId()))
-                .body(room);
+        return ResponseEntity.created(new URI(WebConstants.API_ADMIN_PATH + "/places/"+placeId+ "/rooms/" + roomDto1.getId())).body(roomDto1);
     }
 }
