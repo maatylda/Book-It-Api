@@ -18,12 +18,16 @@ public class UserDto {
 
     @Email
     private String email;
+
     @NotNull
     private String firstName;
+
     @NotNull
     private String lastName;
+
     @NotNull
     private String phoneNumber;
+
     @Length(min = 8)
     private String password;
 }
