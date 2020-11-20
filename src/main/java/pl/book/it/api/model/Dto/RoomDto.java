@@ -19,10 +19,8 @@ public class RoomDto {
 
     private Long id;
 
-    @Enumerated(value = EnumType.STRING)
     private RoomStandard standard;
 
-    @Enumerated(value = EnumType.STRING)
     private RoomType roomType;
 
     @NotNull

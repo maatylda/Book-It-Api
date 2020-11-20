@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 //temporary
                 .antMatchers("/bia/admin/**").permitAll()
-                .antMatchers("/h2/**").authenticated().and()
+                .antMatchers("/h2/**").permitAll().and()
                 .formLogin()
                 .and()
                 .httpBasic()

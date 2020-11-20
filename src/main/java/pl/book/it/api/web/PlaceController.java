@@ -32,6 +32,7 @@ public class PlaceController {
     public Places showPlacesByTownAvailableInDates(@RequestParam(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
                                                    @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                                    @RequestParam(name = "town") String townName) {
+
         return placeService.findAllPlacesInTownAvailableInDates(dateFrom, dateTo, townName);
     }
 

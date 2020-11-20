@@ -14,6 +14,7 @@ import pl.book.it.api.services.town.TownService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -27,22 +28,18 @@ public class PlaceService {
     private final TownService townService;
 
     public Places findAllPlaces() {
-        return new Places(placeRepository.findAll()
-                .stream()
-                .map(placeMapStructMapper::toPlaceDto)
-                .collect(Collectors.toList()));
+        return mapPlaceListToPlaces(placeRepository.findAll());
     }
 
     public Places findAllPlacesInTown(String townName) {
-        return new Places(placeRepository.findPlacesByTownName(townName.toUpperCase())
-                .stream()
-                .map(placeMapStructMapper::toPlaceDto)
-                .collect(Collectors.toList()));
+        return mapPlaceListToPlaces(placeRepository.findPlacesByTownName(townName.toUpperCase()));
     }
 
     public Places findAllPlacesInTownAvailableInDates(LocalDate dateFrom, LocalDate dateTo, String townName) {
-        return new Places(placeRepository.findPlacesInTownAvailableInDates(dateFrom, dateTo, townName.toUpperCase())
-                .stream()
+        return mapPlaceListToPlaces(placeRepository.findPlacesInTownAvailableInDates(dateFrom, dateTo, townName.toUpperCase()));
+    }
+    private Places mapPlaceListToPlaces (List<Place> placeList) {
+        return new Places(placeList.stream()
                 .map(placeMapStructMapper::toPlaceDto)
                 .collect(Collectors.toList()));
     }
@@ -65,15 +62,19 @@ public class PlaceService {
     }
 
     public PlaceDto createPlace(PlaceDto placeDto) {
-        final Place place = placeMapStructMapper.toPlace(placeDto);
-        setEmptyRoomsList(place);
-        setEmptyPicturesList(place);
         final Town town = townService.getTownByNameOrElseThrow(placeDto.getTownName());
+        final Place place = placeMapStructMapper.toPlace(placeDto);
+        placeSetUp(place);
         place.setTown(town);
         town.getPlaces().add(place);
         final Place savedPlace = placeRepository.save(place);
         townService.saveTown(town);
         return placeMapStructMapper.toPlaceDto(savedPlace);
+    }
+
+    private void placeSetUp(Place place) {
+        setEmptyRoomsList(place);
+        setEmptyPicturesList(place);
     }
 
     private void setEmptyPicturesList(Place place) {
