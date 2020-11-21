@@ -1,8 +1,10 @@
 package pl.book.it.api.bootstrap;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.book.it.api.domain.*;
@@ -16,7 +18,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 @Transactional
 public class DbInitializer {
 
@@ -26,6 +27,22 @@ public class DbInitializer {
     private final RoomRepository roomRepository;
     private final BookingRepository bookingRepository;
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+
+    public DbInitializer(PlaceRepository placeRepository, UserRepository userRepository,
+                         TownRepository townRepository, RoomRepository roomRepository, BookingRepository bookingRepository,
+                         UserService userService,@Qualifier("bcryptPasswordEncoder") PasswordEncoder passwordEncoder) {
+        this.placeRepository = placeRepository;
+        this.userRepository = userRepository;
+        this.townRepository = townRepository;
+        this.roomRepository = roomRepository;
+        this.bookingRepository = bookingRepository;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+
+
 
     @EventListener(value = ContextRefreshedEvent.class)
     public void onEvent() {
@@ -33,9 +50,9 @@ public class DbInitializer {
             return;
         }
 
-        User user = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_1, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
-        User user2 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_2, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
-        User user3 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_3, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
+        User user = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_1, passwordEncoder.encode(TestConsts.PASSWORD_1), TestConsts.PHONE_NUMBER_1);
+        User user2 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_2, passwordEncoder.encode(TestConsts.PASSWORD_1), TestConsts.PHONE_NUMBER_1);
+        User user3 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_3, passwordEncoder.encode(TestConsts.PASSWORD_1), TestConsts.PHONE_NUMBER_1);
         // User user4 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_3, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
         userRepository.saveAll(List.of(user, user2, user3));
 

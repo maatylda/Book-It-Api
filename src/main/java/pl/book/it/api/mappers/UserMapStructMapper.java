@@ -8,10 +8,8 @@ import pl.book.it.api.model.Dto.UserDto;
 @Mapper(config = IgnoreUnmappedMapperConfig.class)
 public interface UserMapStructMapper {
 
-    //czy to jest ok?
-    @Mapping(target = "password", constant = "***** ***")
+    //password should not be mapped
     UserDto toUserDto(User user);
 
-    @Mapping(target = "password", ignore = true)
     User toUser(UserDto userDto);
 }
