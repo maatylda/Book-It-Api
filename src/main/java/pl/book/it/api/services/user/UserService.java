@@ -1,6 +1,6 @@
 package pl.book.it.api.services.user;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,13 +14,18 @@ import pl.book.it.api.repositories.UserRepository;
 import java.util.ArrayList;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapStructMapper userMapStructMapper;
     private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, UserMapStructMapper userMapStructMapper, @Qualifier("bcryptPasswordEncoder") PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.userMapStructMapper = userMapStructMapper;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public boolean accountWithEmailExists(String email) {
         return userRepository.findById(email).isPresent();
@@ -30,6 +35,7 @@ public class UserService {
         return userRepository.findById(email).orElseThrow(() ->
                 new BookItException("There is no user with email: " + email, "email"));
     }
+
 
     public UserDto findUserDtoById(String email) {
         return userMapStructMapper.toUserDto(findUserById(email));

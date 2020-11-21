@@ -7,13 +7,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import pl.book.it.api.services.user.CustomUserDetailsService;
 
-@Profile("!dev")
+@Primary
+@Profile("dev")
 @Configuration
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityDevConfig extends WebSecurityConfigurerAdapter {
 
     private final ApiUserConfig apiUserConfig;
 
@@ -24,8 +23,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()
+                .antMatchers("/h2/**").permitAll()
+                .anyRequest().authenticated()
                 .and().csrf().disable()
-                .httpBasic();
+                .httpBasic()
+        .and().headers().frameOptions().disable();
     }
 }
