@@ -50,7 +50,7 @@ public class DbInitializer {
             return;
         }
 
-        User user = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_1, passwordEncoder.encode(TestConsts.PASSWORD_1), TestConsts.PHONE_NUMBER_1);
+        User user = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_1, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
         User user2 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_2, passwordEncoder.encode(TestConsts.PASSWORD_1), TestConsts.PHONE_NUMBER_1);
         User user3 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_3, passwordEncoder.encode(TestConsts.PASSWORD_1), TestConsts.PHONE_NUMBER_1);
         // User user4 = getUserFromService(TestConsts.FIRST_NAME_1, TestConsts.LAST_NAME_1, TestConsts.EMAIL_3, TestConsts.PASSWORD_1, TestConsts.PHONE_NUMBER_1);
