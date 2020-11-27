@@ -50,9 +50,9 @@ public class BookingDto {
 
     private boolean paid;
 
-    @JsonIgnore
-    @AssertTrue(message = "Booking start date need to be before ending date")
-    public boolean isDateFromBeforeDateTo() {
-        return dateFrom.isBefore(dateTo);
-    }
+//    @JsonIgnore
+//    @AssertTrue(message = "Booking start date need to be before ending date")
+//    public boolean isDateFromBeforeDateTo() {
+//        return dateFrom.isBefore(dateTo);
+//    }
 }
