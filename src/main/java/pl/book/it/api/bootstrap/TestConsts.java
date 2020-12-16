@@ -25,12 +25,16 @@ public interface TestConsts {
     LocalDate BOOKING_DATE_FROM_3 = LocalDate.of(2020, 10, 1);
     LocalDate BOOKING_DATE_FROM_4 = LocalDate.of(2020, 11, 5);
     LocalDate BOOKING_DATE_FROM_5 = LocalDate.of(2020, 10, 30);
+    LocalDate BOOKING_DATE_FROM_6 = LocalDate.of(2020, 12, 11);
+    LocalDate BOOKING_DATE_FROM_7 = LocalDate.of(2021, 01, 01);
 
     LocalDate BOOKING_DATE_TO_1 = LocalDate.of(2020, 11, 30);
     LocalDate BOOKING_DATE_TO_2 = LocalDate.of(2020, 12, 2);
     LocalDate BOOKING_DATE_TO_3 = LocalDate.of(2020, 10, 10);
     LocalDate BOOKING_DATE_TO_4 = LocalDate.of(2020, 11, 6);
     LocalDate BOOKING_DATE_TO_5 = LocalDate.of(2020, 11, 2);
+    LocalDate BOOKING_DATE_TO_6 = LocalDate.of(2020, 12, 15);
+    LocalDate BOOKING_DATE_TO_7 = LocalDate.of(2021, 01, 03);
 
     Double PRICE_1 = 200.10;
 }

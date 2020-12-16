@@ -76,7 +76,9 @@ public class DbInitializer {
         Booking booking3 = bookingBuilder(user, room3, TestConsts.BOOKING_DATE_FROM_3, TestConsts.BOOKING_DATE_TO_3);
         Booking booking4 = bookingBuilder(user, room4, TestConsts.BOOKING_DATE_FROM_4, TestConsts.BOOKING_DATE_TO_4);
         Booking booking5 = bookingBuilder(user, room5, TestConsts.BOOKING_DATE_FROM_5, TestConsts.BOOKING_DATE_TO_5);
-        bookingRepository.saveAll(List.of(booking, booking2, booking3, booking4, booking5));
+        Booking booking6 = bookingBuilder(user, room, TestConsts.BOOKING_DATE_FROM_6, TestConsts.BOOKING_DATE_TO_6);
+        Booking booking7 = bookingBuilder(user, room, TestConsts.BOOKING_DATE_FROM_7, TestConsts.BOOKING_DATE_TO_7);
+        bookingRepository.saveAll(List.of(booking, booking2, booking3, booking4, booking5,booking6,booking7));
     }
 
     private Place placeBuilder(Town town, String hotelName1, String hotelDescription1) {

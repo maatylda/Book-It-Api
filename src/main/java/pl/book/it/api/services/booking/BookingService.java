@@ -29,10 +29,14 @@ public class BookingService {
     private final BookingMapper bookingMapper;
 
     public Booking createBooking(BookingDto bookingDto) {
+        final Room room = roomService.findRoomById(bookingDto.getRoomId());
         final Booking savedBooking = bookingMapper.toBooking(bookingDto);
         savedBooking.setPrice(calculateBookingPrice(bookingDto));
         savedBooking.setPaid(false);
-        return bookingRepository.save(savedBooking);
+        final Booking finalBooking = bookingRepository.save(savedBooking);
+        room.getBookings().add(finalBooking);
+        roomService.updateRoom(room);
+        return finalBooking;
     }
 
     public BookingDto createBookingAndReturnCreated(BookingDto bookingDto) {
